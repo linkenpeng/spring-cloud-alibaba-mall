@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intecsec.mall.order.mapper.OrderItemMapper">
+  <resultMap id="BaseResultMap" type="com.intecsec.mall.order.entity.OrderItem">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="item_id" jdbcType="BIGINT" property="itemId" />
+    <result column="item_price" jdbcType="BIGINT" property="itemPrice" />
+    <result column="item_num" jdbcType="INTEGER" property="itemNum" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="actual_price" jdbcType="BIGINT" property="actualPrice" />
+    <result column="coupon_amount" jdbcType="BIGINT" property="couponAmount" />
+    <result column="point_amount" jdbcType="BIGINT" property="pointAmount" />
+    <result column="discount_amount" jdbcType="BIGINT" property="discountAmount" />
+    <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
+    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
+    <result column="delete_mark" jdbcType="TINYINT" property="deleteMark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_id, item_id, item_price, item_num, item_name, actual_price, coupon_amount, point_amount,
+    discount_amount, gmt_created, gmt_update, delete_mark
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_order_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+    <select id="getListByOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from mall_order_item
+        where order_id = #{orderId,jdbcType=BIGINT}
+    </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mall_order_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.intecsec.mall.order.entity.OrderItem">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into mall_order_item (order_id, item_id, item_price, 
+      item_num, item_name, actual_price, coupon_amout,
+       point_amount, discount_amount, gmt_created, gmt_update,
+      delete_mark)
+    values (#{orderId,jdbcType=BIGINT}, #{itemId,jdbcType=BIGINT}, #{itemPrice,jdbcType=BIGINT}, 
+      #{itemNum,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{actualPrice,jdbcType=BIGINT}, #{couponAmount,jdbcType=BIGINT},
+      #{pointAmount,jdbcType=INTEGER},
+      #{discountAmount,jdbcType=BIGINT}, #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtUpdate,jdbcType=TIMESTAMP}, 
+      #{deleteMark,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.intecsec.mall.order.entity.OrderItem">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into mall_order_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="itemPrice != null">
+        item_price,
+      </if>
+      <if test="itemNum != null">
+        item_num,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="actualPrice != null">
+        actual_price,
+      </if>
+      <if test="couponAmount != null">
+        coupon_amount,
+      </if>
+      <if test="pointAmount != null">
+        point_amount,
+      </if>
+      <if test="discountAmount != null">
+        discount_amount,
+      </if>
+      <if test="gmtCreated != null">
+        gmt_created,
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update,
+      </if>
+      <if test="deleteMark != null">
+        delete_mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=BIGINT},
+      </if>
+      <if test="itemPrice != null">
+        #{itemPrice,jdbcType=BIGINT},
+      </if>
+      <if test="itemNum != null">
+        #{itemNum,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="actualPrice != null">
+        #{actual_price,jdbcType=BIGINT},
+      </if>
+      <if test="couponAmount != null">
+        #{couponAmount,jdbcType=BIGINT},
+      </if>
+      <if test="pointAmount != null">
+        #{pointAmount,jdbcType=BIGINT},
+      </if>
+      <if test="discountAmount != null">
+        #{discountAmount,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreated != null">
+        #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null">
+        #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null">
+        #{deleteMark,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.intecsec.mall.order.entity.OrderItem">
+    update mall_order_item
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=BIGINT},
+      </if>
+      <if test="itemPrice != null">
+        item_price = #{itemPrice,jdbcType=BIGINT},
+      </if>
+      <if test="itemNum != null">
+        item_num = #{itemNum,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="actualPrice != null">
+        actual_price = #{actualPrice,jdbcType=BIGINT},
+      </if>
+      <if test="couponAmount != null">
+        coupon_amount = #{couponAmout,jdbcType=BIGINT},
+      </if>
+      <if test="pointAmount != null">
+        point_amount = #{pointAmount,jdbcType=BIGINT},
+      </if>
+      <if test="discountAmount != null">
+        discount_amount = #{discountAmount,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreated != null">
+        gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null">
+        delete_mark = #{deleteMark,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.intecsec.mall.order.entity.OrderItem">
+    update mall_order_item
+    set order_id = #{orderId,jdbcType=BIGINT},
+      item_id = #{itemId,jdbcType=BIGINT},
+      item_price = #{itemPrice,jdbcType=BIGINT},
+      item_num = #{itemNum,jdbcType=INTEGER},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      actual_price = #{actualPrice,jdbcType=BIGINT},
+      coupon_amount = #{couponAmount,jdbcType=BIGINT},
+      point_amount = #{pointAmount,jdbcType=BIGINT},
+      discount_amount = #{discountAmount,jdbcType=BIGINT},
+      gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+      delete_mark = #{deleteMark,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
