@@ -1,3 +1,4 @@
+/**
 package com.intecsec.mall.gateway.config;
 
 import org.springframework.context.annotation.Bean;
@@ -10,10 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-/**
- * @author peter.peng
- * @date 2020/8/7
- */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -50,3 +47,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.httpBasic();
 	}
 }
+ */

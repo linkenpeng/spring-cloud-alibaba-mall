@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author: peter.peng
  * @create: 2020-03-22 10:28
  **/
-@FeignClient(value = "USER-SERVICE")
+@FeignClient(value = "user-service")
 public interface UserService {
 
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)

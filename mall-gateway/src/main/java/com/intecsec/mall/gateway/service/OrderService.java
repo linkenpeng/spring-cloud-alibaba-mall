@@ -13,7 +13,7 @@ import java.util.List;
  * @author: peter.peng
  * @create: 2020-03-22 10:28
  **/
-@FeignClient(value = "ORDER-SERVICE")
+@FeignClient(value = "order-service")
 public interface OrderService {
 
     @PostMapping("/order/add")

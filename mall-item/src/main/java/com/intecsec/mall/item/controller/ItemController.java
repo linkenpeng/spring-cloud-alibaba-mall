@@ -1,4 +1,4 @@
-package com.intecsec.mall.item.api;
+package com.intecsec.mall.item.controller;
 
 import com.intecsec.mall.item.ItemDTO;
 import com.intecsec.mall.item.manager.ItemManager;
@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/item")
-public class ItemService {
+public class ItemController {
 
     @Autowired
     private ItemManager itemManager;

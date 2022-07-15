@@ -1,4 +1,4 @@
-package com.intecsec.mall.user.api;
+package com.intecsec.mall.user.controller;
 
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.dto.UserDTO;
@@ -17,7 +17,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/user")
-public class UserService {
+public class UserController {
 
     @Autowired
     private UserManager userManager;

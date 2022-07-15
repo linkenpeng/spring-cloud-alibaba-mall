@@ -1,4 +1,4 @@
-package com.intecsec.mall.gateway.api;
+package com.intecsec.mall.gateway.controller;
 
 import com.intecsec.mall.common.utils.RestResponse;
 import com.intecsec.mall.gateway.service.UserService;
@@ -26,7 +26,7 @@ public class UserController {
     @Qualifier(value = "restTemplate")
     private RestTemplate restTemplate;
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Object getUserName(@PathVariable Long userId) {
         log.info("获取用户信息userId:{}", userId);

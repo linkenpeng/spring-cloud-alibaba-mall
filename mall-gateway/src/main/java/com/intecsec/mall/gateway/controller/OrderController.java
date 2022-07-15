@@ -1,4 +1,4 @@
-package com.intecsec.mall.gateway.api;
+package com.intecsec.mall.gateway.controller;
 
 import com.intecsec.mall.common.utils.JsonUtils;
 import com.intecsec.mall.common.utils.RestResponse;

@@ -14,7 +14,7 @@ import java.util.List;
  * @author: peter.peng
  * @create: 2020-03-22 10:28
  **/
-@FeignClient(value = "ITEM-SERVICE")
+@FeignClient(value = "item-service")
 public interface ItemService {
 
     @RequestMapping(value = "/item/listByIds", method = RequestMethod.GET)

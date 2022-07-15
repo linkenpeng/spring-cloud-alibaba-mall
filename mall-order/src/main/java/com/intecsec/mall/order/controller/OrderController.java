@@ -1,4 +1,4 @@
-package com.intecsec.mall.order.api;
+package com.intecsec.mall.order.controller;
 
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.item.ItemDTO;
@@ -23,7 +23,7 @@ import java.util.Map;
  **/
 @RestController
 @RequestMapping("/order")
-public class OrderService {
+public class OrderController {
 
     @Autowired
     private OrderManager orderManager;
