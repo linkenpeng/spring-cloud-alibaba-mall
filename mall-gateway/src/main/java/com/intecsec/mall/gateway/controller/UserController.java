@@ -1,5 +1,6 @@
 package com.intecsec.mall.gateway.controller;
 
+import com.intecsec.mall.common.utils.JsonUtils;
 import com.intecsec.mall.common.utils.RestResponse;
 import com.intecsec.mall.gateway.service.UserService;
 import com.intecsec.mall.user.dto.UserDTO;
@@ -15,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
  * @create: 2020-03-22 10:32
  **/
 @RestController
-@RequestMapping("/user")
+@RequestMapping(value = "/user", produces = "application/json;charset=UTF-8")
 @Slf4j
 public class UserController {
 
@@ -26,13 +27,15 @@ public class UserController {
     @Qualifier(value = "restTemplate")
     private RestTemplate restTemplate;
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    @ResponseBody
+    @GetMapping("/{userId}")
     public Object getUserName(@PathVariable Long userId) {
-        log.info("获取用户信息userId:{}", userId);
+        log.info("获取用户信息 request userId:{}", userId);
 
+        // 有两种方式可以远程调用user-service, 1: 通过RestTemplate 2. 通过FeignClient
         UserDTO userDTO = userService.getUser(userId);
         // UserDTO userDTO = restTemplate.getForEntity("http://user-service/user/{userId}", UserDTO.class, userId).getBody();
+        log.info("获取用户信息 response userDTO:{}", JsonUtils.toJson(userDTO));
+
         return RestResponse.success(userDTO);
     }
 

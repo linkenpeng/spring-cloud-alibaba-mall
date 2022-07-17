@@ -28,7 +28,7 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mall-user-client</artifactId>
+            <artifactId>mall-user-common</artifactId>
         </dependency>
         
         <!-- 数据库mysql -->

@@ -26,11 +26,11 @@ public class RestResponse {
 
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT_STR);
 
-    static{
+    static {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
         gsonBuilder.disableHtmlEscaping();
-        gson = gsonBuilder.setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        gson = gsonBuilder.setDateFormat(DATE_FORMAT_STR).create();
     }
 
     /**
@@ -48,12 +48,6 @@ public class RestResponse {
         return toJsonStr(apiResponse);
     }
 
-    public static ApiResponse succ(Object module){
-        ApiResponse apiResponse = new ApiResponse(ResponseEnum.REQUEST_SUCESS);
-        apiResponse.setData(module);
-        return apiResponse;
-    }
-
     public static String fail(ResponseEnum responseEnum) {
         return fail(responseEnum, responseEnum.getMsg());
     }
@@ -64,7 +58,7 @@ public class RestResponse {
     }
 
     /**
-     *  返回特定错误的json串
+     * 返回特定错误的json串
      */
     public static String fail(int code, String message) {
         ApiResponse apiResponse = new ApiResponse(code, message);

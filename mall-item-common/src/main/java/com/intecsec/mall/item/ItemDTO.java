@@ -30,5 +30,4 @@ public class ItemDTO implements Serializable {
     private Date gmtUpdate;
 
     private Byte deleteMark;
-
 }

@@ -22,4 +22,5 @@ public class AddOrderDTO implements Serializable {
     private Long consignee_id;
 
     private List<AddOrderItemDTO> order_item_list;
+
 }

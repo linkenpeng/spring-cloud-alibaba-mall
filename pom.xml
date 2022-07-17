@@ -13,11 +13,11 @@
         <module>common-mysql</module>
         <module>mall-gateway</module>
         <module>mall-user</module>
-        <module>mall-user-client</module>
+        <module>mall-user-common</module>
         <module>mall-item</module>
-        <module>mall-item-client</module>
+        <module>mall-item-common</module>
         <module>mall-order</module>
-        <module>mall-order-client</module>
+        <module>mall-order-common</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -71,19 +71,19 @@
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>mall-user-client</artifactId>
+                <artifactId>mall-user-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>mall-item-client</artifactId>
+                <artifactId>mall-item-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>mall-order-client</artifactId>
+                <artifactId>mall-order-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

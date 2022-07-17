@@ -49,15 +49,15 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mall-user-client</artifactId>
+            <artifactId>mall-user-common</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mall-item-client</artifactId>
+            <artifactId>mall-item-common</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mall-order-client</artifactId>
+            <artifactId>mall-order-common</artifactId>
         </dependency>
 
     </dependencies>

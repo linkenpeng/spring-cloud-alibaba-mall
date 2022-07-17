@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mall-user-client</artifactId>
+    <artifactId>mall-user-common</artifactId>
 
     <dependencies>
         <dependency>
