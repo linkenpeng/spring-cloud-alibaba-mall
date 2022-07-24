@@ -1,5 +1,6 @@
 package com.intecsec.mall.gateway.service;
 
+import com.intecsec.mall.gateway.service.fallback.UserServiceFallback;
 import com.intecsec.mall.user.dto.UserDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author: peter.peng
  * @create: 2020-03-22 10:28
  **/
-@FeignClient(value = "user-service")
+@FeignClient(value = "user-service",
+        fallback = UserServiceFallback.class)
 public interface UserService {
 
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)

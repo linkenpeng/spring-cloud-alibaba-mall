@@ -1,5 +1,5 @@
 /**
-package com.intecsec.mall.gateway.config;
+package com.intecsec.mall.gateway.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
