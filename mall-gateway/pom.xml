@@ -13,6 +13,7 @@
 
     <dependencies>
 
+        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -26,24 +27,39 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        -->
+
+        <!-- start-gateway 与 starter-web、starter-actuator 冲突，因此不能引入 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
+
+        <!-- 在新版nacos中删除了Ribbon的jar包，因此无法通过lb路由到指定微服务 因此需要引入starter-loadbalancer -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
+
+        <!--
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
+        -->
+
 
         <!--
         <dependency>
@@ -52,6 +68,7 @@
         </dependency>
         -->
 
+        <!--
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mall-user-common</artifactId>
@@ -64,6 +81,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>mall-order-common</artifactId>
         </dependency>
+        -->
 
     </dependencies>
 

@@ -1,0 +1,11 @@
+# Nacos
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: dev.nacos.intecsec.com:8848
+#    sentinel:
+#      transport:
+#        port: 2301
+#        dashboard: localhost:8080
+#      eager: true

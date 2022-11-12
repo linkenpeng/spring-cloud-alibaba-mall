@@ -12,6 +12,7 @@ import com.intecsec.mall.order.mapper.OrderConsigneeMapper;
 import com.intecsec.mall.order.mapper.OrderItemMapper;
 import com.intecsec.mall.order.mapper.OrderMapper;
 import com.intecsec.mall.order.util.OrderUtil;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,6 +76,7 @@ public class OrderManagerImpl implements OrderManager {
 
     @Override
     @Transactional(rollbackFor = {Exception.class})
+    // @GlobalTransactional
     public OrderDTO addOrder(OrderDTO orderDTO) {
         Order order = DOUtils.copy(orderDTO, Order.class);
         order.setOrderStatus(OrderStatusEnum.UN_PAID.getOrderStatus());

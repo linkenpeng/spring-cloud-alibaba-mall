@@ -1,0 +1,56 @@
+server:
+  port: 2000
+  server:
+    compression:
+      enabled: true
+      excluded-user-agents: gozilla,traviata
+      mime-types: application/json,application/xml,text/html,text/xml,text/plain
+      min-response-size: 512
+
+spring:
+  application:
+    name: gateway-service
+  profiles:
+    active: local
+  cloud:
+# https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/
+    gateway:
+#      default-filters: Y-Foo, Bar
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: order
+          uri: lb://order-service:2300
+#          uri: http://localhost:2300
+          predicates:
+            - Path=/order/**
+
+#  zipkin:
+#    base-url: http://zipkin.server:30774/
+#  sleuth:
+#    sampler:
+#      percentage: 1.0
+
+
+# Log
+logging:
+  file:
+    path: logs/intecsec/springcloud/alibaba/${spring.application.name}
+  level:
+    org:
+      springframework: INFO
+    com:
+      intecsec: DEBUG
+
+# feign
+feign:
+  httpclient:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 512
+    response:
+      enabled: true
