@@ -1,5 +1,6 @@
 package com.intecsec.mall.order.service;
 
+import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.item.ItemDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,5 +19,5 @@ import java.util.List;
 public interface ItemService {
 
     @RequestMapping(value = "/item/listByIds", method = RequestMethod.GET)
-    List<ItemDTO> itemListByIds(@RequestParam(value = "item_ids", required = false, defaultValue = "") String itemIds);
+    ApiResponse<List<ItemDTO>> itemListByIds(@RequestParam(value = "item_ids", required = false, defaultValue = "") String itemIds);
 }

@@ -1,5 +1,6 @@
 package com.intecsec.mall.order.service;
 
+import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.dto.UserDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface UserService {
 
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-    UserDTO getUser(@PathVariable("userId") Long userId);
+    ApiResponse<UserDTO> getUser(@PathVariable("userId") Long userId);
 
     @RequestMapping(value = "/user/consigee/{id}", method = RequestMethod.GET)
-    UserConsigneeDTO getUserConsignee(@PathVariable("id") Long id);
+    ApiResponse<UserConsigneeDTO> getUserConsignee(@PathVariable("id") Long id);
 }

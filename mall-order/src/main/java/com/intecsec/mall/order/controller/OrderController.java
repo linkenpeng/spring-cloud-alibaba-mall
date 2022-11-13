@@ -1,5 +1,6 @@
 package com.intecsec.mall.order.controller;
 
+import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.item.ItemDTO;
 import com.intecsec.mall.order.*;
@@ -35,31 +36,37 @@ public class OrderController {
     private ItemService itemService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public OrderDTO getOrder(@PathVariable(value = "id") Long id) {
-        return orderManager.getOrder(id);
+    public ApiResponse<OrderDTO> getOrder(@PathVariable(value = "id") Long id) {
+        OrderDTO orderDTO = orderManager.getOrder(id);
+        return new ApiResponse(orderDTO);
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<OrderDTO> getOrderList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+    public ApiResponse<List<OrderDTO>> getOrderList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                 @RequestParam(value = "pageSize", required = false, defaultValue = "2") int pageSize) {
-        return orderManager.getOrderList(page, pageSize);
+        List<OrderDTO> orderDTOList = orderManager.getOrderList(page, pageSize);
+        return new ApiResponse(orderDTOList);
     }
 
     @RequestMapping(value = "/{id}/{userId}", method = RequestMethod.GET)
-    public OrderDTO getUserOrder(@PathVariable Long id, @PathVariable Long userId) {
-        return orderManager.getUserOrder(id, userId);
+    public ApiResponse<OrderDTO> getUserOrder(@PathVariable Long id, @PathVariable Long userId) {
+        OrderDTO orderDTO =  orderManager.getUserOrder(id, userId);
+        return new ApiResponse(orderDTO);
     }
 
     @RequestMapping(value = "/list/{userId}", method = RequestMethod.GET)
-    public List<OrderDTO> getUserOrderList(@PathVariable Long userId, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+    public ApiResponse<List<OrderDTO>> getUserOrderList(@PathVariable Long userId, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                      @RequestParam(value = "pageSize", required = false, defaultValue = "2") int pageSize) {
-        return orderManager.getUserOrderList(page, pageSize, userId);
+        List<OrderDTO> orderDTOList = orderManager.getUserOrderList(page, pageSize, userId);
+        return new ApiResponse(orderDTOList);
     }
 
     @PostMapping("/add")
-    public OrderDTO addOrder(@RequestBody AddOrderDTO addOrderDTO) {
+    public ApiResponse<OrderDTO> addOrder(@RequestBody AddOrderDTO addOrderDTO) {
 
-        UserConsigneeDTO userConsigneeDTO = userService.getUserConsignee(addOrderDTO.getConsignee_id());
+        ApiResponse<UserConsigneeDTO> userConsigneeResponse = userService.getUserConsignee(addOrderDTO.getConsignee_id());
+        UserConsigneeDTO userConsigneeDTO = userConsigneeResponse.getData();
+
         OrderConsigneeDTO orderConsigneeDTO = DOUtils.copy(userConsigneeDTO, OrderConsigneeDTO.class);
 
         OrderDTO orderDTO = new OrderDTO();
@@ -72,7 +79,8 @@ public class OrderController {
             itemNumberMap.put(addOrderItemDTO.getItem_id(), addOrderItemDTO.getNumber());
         }
 
-        List<ItemDTO> itemDTOS = itemService.itemListByIds(StringUtils.join(itemIds, ","));
+        ApiResponse<List<ItemDTO>> itemResponse = itemService.itemListByIds(StringUtils.join(itemIds, ","));
+        List<ItemDTO> itemDTOS = itemResponse.getData();
 
         List<OrderItemDTO> orderItemDTOS = new ArrayList<>();
         long orderPriceAmount = 0L;
@@ -98,7 +106,8 @@ public class OrderController {
         orderDTO.setDeliveryFee(0L);
         orderDTO.setPayAmount(orderDTO.getPriceAmount() - orderDTO.getDiscountAmount() + orderDTO.getDeliveryFee());
 
+        OrderDTO returnOrderDTO = orderManager.addOrder(orderDTO);
 
-        return orderManager.addOrder(orderDTO);
+        return new ApiResponse(returnOrderDTO);
     }
 }

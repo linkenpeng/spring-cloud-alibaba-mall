@@ -1,5 +1,6 @@
 package com.intecsec.mall.user.controller;
 
+import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.dto.UserDTO;
 import com.intecsec.mall.user.manager.UserConsigneeManager;
@@ -29,31 +30,34 @@ public class UserController {
     private int serverPort = 0;
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public UserDTO getUser(@PathVariable Long userId) {
+    public ApiResponse<UserDTO> getUser(@PathVariable Long userId) {
         UserDTO userDTO = userManager.getUser(userId);
         userDTO.setUserServicePort(serverPort);
-        return userDTO;
+        return new ApiResponse(userDTO);
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<UserDTO> getUserList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+    public ApiResponse<List<UserDTO>> getUserList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                      @RequestParam(value = "pageSize", required = false, defaultValue = "2") int pageSize) {
-        return userManager.getUserList(page, pageSize);
+        List<UserDTO> userDTOList = userManager.getUserList(page, pageSize);
+        return new ApiResponse<>(userDTOList);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.POST)
-    public int update(@PathVariable Long userId, @RequestBody UserDTO userDTO) {
-        return userManager.update(userId, userDTO);
+    public ApiResponse<Integer> update(@PathVariable Long userId, @RequestBody UserDTO userDTO) {
+        int id = userManager.update(userId, userDTO);
+        return new ApiResponse(id);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
-    public int delete(@PathVariable Long userId) {
-        return userManager.delete(userId);
+    public ApiResponse<Integer> delete(@PathVariable Long userId) {
+        int id = userManager.delete(userId);
+        return new ApiResponse(id);
     }
 
     @RequestMapping(value = "/consigee/{id}", method = RequestMethod.GET)
-    public UserConsigneeDTO getUserConsignee(@PathVariable Long id) {
+    public ApiResponse<UserConsigneeDTO> getUserConsignee(@PathVariable Long id) {
         UserConsigneeDTO userConsigneeDTO = userConsigneeManager.getOne(id);
-        return userConsigneeDTO;
+        return new ApiResponse(userConsigneeDTO);
     }
 }

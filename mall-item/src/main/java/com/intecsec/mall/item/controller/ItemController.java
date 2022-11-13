@@ -1,5 +1,6 @@
 package com.intecsec.mall.item.controller;
 
+import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.item.ItemDTO;
 import com.intecsec.mall.item.manager.ItemManager;
 import org.apache.commons.lang3.StringUtils;
@@ -22,19 +23,21 @@ public class ItemController {
     private ItemManager itemManager;
 
     @RequestMapping(value = "/{itemId}", method = RequestMethod.GET)
-    public ItemDTO itemDetail(@PathVariable Long itemId) {
-        return itemManager.itemDetail(itemId);
+    public ApiResponse<ItemDTO> itemDetail(@PathVariable Long itemId) {
+        ItemDTO itemDTO = itemManager.itemDetail(itemId);
+        return new ApiResponse(itemDTO);
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<ItemDTO> itemList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+    public ApiResponse<List<ItemDTO>> itemList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                    @RequestParam(value = "pageSize", required = false, defaultValue = "2") int pageSize) {
-        return itemManager.itemList(page, pageSize);
+        List<ItemDTO> itemDTOS = itemManager.itemList(page, pageSize);
+        return new ApiResponse(itemDTOS);
     }
 
 
     @RequestMapping(value = "/listByIds", method = RequestMethod.GET)
-    public List<ItemDTO> itemListByIds(@RequestParam(value = "item_ids", required = false, defaultValue = "") String itemIds) {
+    public ApiResponse<List<ItemDTO>> itemListByIds(@RequestParam(value = "item_ids", required = false, defaultValue = "") String itemIds) {
         List<Long> ids = new ArrayList<>();
         if(StringUtils.isNotEmpty(itemIds)) {
             String idSplit[] = StringUtils.split(itemIds, ",");
@@ -43,7 +46,8 @@ public class ItemController {
             }
         }
 
-        return itemManager.getItemListByIds(ids);
+        List<ItemDTO> itemDTOList = itemManager.getItemListByIds(ids);
+        return new ApiResponse(itemDTOList);
     }
 
 }

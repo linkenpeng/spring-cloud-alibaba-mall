@@ -3,8 +3,8 @@ package com.intecsec.mall.common.utils;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.intecsec.mall.common.Enums.ResponseEnum;
-import com.intecsec.mall.common.Response.ApiResponse;
+import com.intecsec.mall.common.enums.ResponseEnum;
+import com.intecsec.mall.common.response.ApiResponse;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,7 +15,7 @@ import java.util.Date;
  * @author: peter.peng
  * @create: 2018-11-02 10:51
  **/
-public class RestResponse {
+public class ResponseUtil {
 
     /**
      * 处理下划线分割的json字符串（生成json字符串时候将驼峰转化为下划线，解析json时候将下划线转为驼峰）
@@ -42,9 +42,7 @@ public class RestResponse {
         return gson.toJson(src);
     }
 
-    public static String success(Object module){
-        ApiResponse apiResponse = new ApiResponse(ResponseEnum.REQUEST_SUCESS);
-        apiResponse.setData(module);
+    public static String success(ApiResponse apiResponse){
         return toJsonStr(apiResponse);
     }
 

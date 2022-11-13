@@ -1,0 +1,58 @@
+server:
+  port: 2200
+
+spring:
+  application:
+    name: item-service
+  profiles:
+    active: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 600000
+      max-lifetime: 900000
+      connection-timeout: 3000
+      connection-test-query: /* ping */ SELECT 1
+  zipkin:
+    base-url: http://zipkin.server:30774/
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+# Log
+logging:
+  file:
+    path: logs/intecsec/springcloud/alibaba/${spring.application.name}
+  level:
+    org:
+      springframework: INFO
+    com:
+      intecsec: DEBUG
+
+# Database Common
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.intecsec.mall.item.mapper
+
+# security actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+    enabled-by-default: true
+    sensitive: false
+    enabled: true
+    configprops:
+      enabled: true
+    beans:
+      enabled: true
+    shutdown:
+      enabled: true
+
+# feign
+feign:
+  sentinel:
+    enabled: true

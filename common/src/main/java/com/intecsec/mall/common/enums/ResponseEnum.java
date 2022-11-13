@@ -1,4 +1,4 @@
-package com.intecsec.mall.common.Enums;
+package com.intecsec.mall.common.enums;
 
 /**
  * @description: 响应码
@@ -6,11 +6,12 @@ package com.intecsec.mall.common.Enums;
  * @create: 2018-11-02 10:59
  **/
 public enum ResponseEnum {
-    REQUEST_SUCESS(10000, "请求处理成功"),
+    SUCCESS(10000, "请求处理成功"),
 
     UNAUTHORIZED(40003, "签名验证失败"),
 
     ;
+
     private int code;
     private String msg;
 
@@ -23,15 +24,9 @@ public enum ResponseEnum {
         return code;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public String getMsg() {
         return msg;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 }
