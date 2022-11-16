@@ -1,5 +1,6 @@
 package com.intecsec.mall.user.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.intecsec.mall.user.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -7,7 +8,10 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
+
+
+    /**
     int deleteByPrimaryKey(Long id);
 
     int insert(User record);
@@ -21,4 +25,5 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+     */
 }

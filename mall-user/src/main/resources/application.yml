@@ -36,6 +36,7 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.intecsec.mall.user.mapper
 
+
 # security actuator
 management:
   endpoints:
@@ -57,3 +58,6 @@ feign:
   sentinel:
     enabled: true
 
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

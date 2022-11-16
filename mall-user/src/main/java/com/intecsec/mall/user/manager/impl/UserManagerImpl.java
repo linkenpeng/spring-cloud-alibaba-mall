@@ -32,15 +32,15 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public UserDTO getUser(Long userId) {
-        User user = userMapper.selectByPrimaryKey(userId);
+        User user = userMapper.selectById(userId);
         return DOUtils.copy(user, UserDTO.class);
     }
 
     @Override
     public List<UserDTO> getUserList(int page, int pageSize) {
         int offset = (page - 1) * pageSize;
-        List<User> userList = userMapper.getList(offset, pageSize);
-        return DOUtils.copyList(userList, UserDTO.class);
+        // List<User> userList = userMapper.selectPage(offset, pageSize);
+        return null; //DOUtils.copyList(userList, UserDTO.class);
     }
 
     @Override
@@ -54,14 +54,14 @@ public class UserManagerImpl implements UserManager {
         UserConsignee userConsignee = new UserConsignee();
         userConsignee.setUserId(userId);
         userConsignee.setMobile("15876505396");
-        int updateResult = userConsigneeMapper.updateByPrimaryKeySelective(userConsignee);
+        int updateResult = userConsigneeMapper.updateById(userConsignee);
         log.info("updateResult:{}", updateResult);
 
-        return userMapper.updateByPrimaryKeySelective(user);
+        return userMapper.updateById(user);
     }
 
     @Override
     public int delete(Long userId) {
-        return userMapper.deleteByPrimaryKey(userId);
+        return userMapper.deleteById(userId);
     }
 }
