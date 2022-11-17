@@ -1,5 +1,6 @@
 package com.intecsec.mall.user.test;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intecsec.mall.user.entity.User;
 import com.intecsec.mall.user.mapper.UserMapper;
@@ -20,10 +21,42 @@ public class UserApplicationTest {
     @Resource
     private UserMapper userMapper;
 
+    @Test
+    public void testWrapper() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        // queryWrapper.ge("age", 20);
+
+        // eq ne
+        // queryWrapper.eq("user_name", "qq");
+
+        // queryWrapper.between("age", 20, 30);
+
+        // like
+        queryWrapper.like("user_name", "6");
+
+        queryWrapper.orderByDesc("age");
+
+        List<User> users = userMapper.selectList(queryWrapper);
+        System.out.println(users);
+    }
+
+    @Test
+    public void testDelete() {
+        int i = userMapper.deleteById(1L);
+        System.out.println(i);
+
+        int i1 = userMapper.deleteBatchIds(Arrays.asList(1, 2));
+        System.out.println(i1);
+
+        Map<String, Object> columnMap = new HashMap<>();
+        columnMap.put("user_name", "qq55");
+        int i2 = userMapper.deleteByMap(columnMap);
+        System.out.println(i2);
+    }
 
     @Test
     public void testPage() {
-        Page<User> page = new Page(1, 3);
+        Page<User> page = new Page(2, 3);
         Page<User> userPage = userMapper.selectPage(page, null);
         long pages = userPage.getPages();
         long current = userPage.getCurrent();
@@ -85,7 +118,7 @@ public class UserApplicationTest {
         // user.setVersion(1);
         //user.setGmtCreated(new Date());
         //user.setGmtUpdate(new Date());
-        user.setDeleteMark(0);
+        // user.setDeleteMark(0);
         int insert = userMapper.insert(user);
         System.out.println(insert);
     }

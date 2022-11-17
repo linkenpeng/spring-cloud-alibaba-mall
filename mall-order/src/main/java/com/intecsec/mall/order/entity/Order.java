@@ -1,11 +1,15 @@
 package com.intecsec.mall.order.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@TableName("mall_order")
 public class Order {
+
     private Long id;
 
     private String orderSn;
@@ -30,5 +34,6 @@ public class Order {
 
     private Date gmtUpdate;
 
+    @TableLogic
     private Byte deleteMark;
 }

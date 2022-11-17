@@ -1,4 +1,4 @@
-package com.intecsec.mall.order.configuration;
+package com.intecsec.mall.order.config;
 
 import com.intecsec.mall.order.service.fallback.UserServiceFallack;
 import org.springframework.context.annotation.Bean;

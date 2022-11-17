@@ -1,10 +1,13 @@
 package com.intecsec.mall.item.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@TableName("mall_item")
 public class Item {
 
     private Long id;
@@ -21,5 +24,6 @@ public class Item {
 
     private Date gmtUpdate;
 
+    @TableLogic
     private Byte deleteMark;
 }

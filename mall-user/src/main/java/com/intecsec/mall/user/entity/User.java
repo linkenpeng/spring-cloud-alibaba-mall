@@ -16,6 +16,8 @@ public class User {
 
     private String password;
 
+    private Integer age;
+
     private String nickName;
 
     private String avatar;
@@ -30,5 +32,7 @@ public class User {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtUpdate;
 
+    @TableLogic
+    @TableField(fill = FieldFill.INSERT)
     private Integer deleteMark;
 }

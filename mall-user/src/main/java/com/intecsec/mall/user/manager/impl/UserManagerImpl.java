@@ -1,5 +1,6 @@
 package com.intecsec.mall.user.manager.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.user.dto.UserDTO;
 import com.intecsec.mall.user.entity.User;
@@ -38,9 +39,10 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public List<UserDTO> getUserList(int page, int pageSize) {
-        int offset = (page - 1) * pageSize;
-        // List<User> userList = userMapper.selectPage(offset, pageSize);
-        return null; //DOUtils.copyList(userList, UserDTO.class);
+        Page<User> userPage = new Page<>(page, pageSize);
+        Page<User> userPageResult = userMapper.selectPage(userPage, null);
+        List<User> records = userPageResult.getRecords();
+        return DOUtils.copyList(records, UserDTO.class);
     }
 
     @Override

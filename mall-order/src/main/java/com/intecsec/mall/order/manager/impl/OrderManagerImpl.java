@@ -1,5 +1,7 @@
 package com.intecsec.mall.order.manager.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.order.OrderDTO;
 import com.intecsec.mall.order.OrderItemDTO;
@@ -12,7 +14,6 @@ import com.intecsec.mall.order.mapper.OrderConsigneeMapper;
 import com.intecsec.mall.order.mapper.OrderItemMapper;
 import com.intecsec.mall.order.mapper.OrderMapper;
 import com.intecsec.mall.order.util.OrderUtil;
-import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +45,7 @@ public class OrderManagerImpl implements OrderManager {
 
     @Override
     public OrderDTO getOrder(long id) {
-        Order order = orderMapper.selectByPrimaryKey(id);
+        Order order = orderMapper.selectById(id);
         OrderDTO orderDTO = DOUtils.copy(order, OrderDTO.class);
 
         decOneOrderItems(orderDTO);
@@ -54,14 +55,18 @@ public class OrderManagerImpl implements OrderManager {
 
     @Override
     public List<OrderDTO> getOrderList(int page, int pageSize) {
-        int offset = getOffset(page, pageSize);
-        List<Order> orderList = orderMapper.getList(offset, pageSize);
+        Page<Order> orderPage = new Page<>(page, pageSize);
+        Page<Order> orderPageResult = orderMapper.selectPage(orderPage, null);
+        List<Order> orderList = orderPageResult.getRecords();
         return DOUtils.copyList(orderList, OrderDTO.class);
     }
 
     @Override
     public OrderDTO getUserOrder(long id, long userId) {
-        Order order = orderMapper.getUserOrder(id, userId);
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", id);
+        queryWrapper.eq("userId", userId);
+        Order order = orderMapper.selectOne(queryWrapper);
         OrderDTO orderDTO = DOUtils.copy(order, OrderDTO.class);
         decOneOrderItems(orderDTO);
         return orderDTO;
@@ -69,8 +74,11 @@ public class OrderManagerImpl implements OrderManager {
 
     @Override
     public List<OrderDTO> getUserOrderList(int page, int pageSize, long userId) {
-        int offset = getOffset(page, pageSize);
-        List<Order> orderList = orderMapper.getUserOrderList(userId, offset, pageSize);
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("userId", userId);
+        Page<Order> orderPage = new Page<>(page, pageSize);
+        Page<Order> orderPageResult = orderMapper.selectPage(orderPage, queryWrapper);
+        List<Order> orderList = orderPageResult.getRecords();
         return DOUtils.copyList(orderList, OrderDTO.class);
     }
 
@@ -84,17 +92,17 @@ public class OrderManagerImpl implements OrderManager {
         OrderConsignee orderConsignee = DOUtils.copy(orderDTO.getOrderConsignee(), OrderConsignee.class);
 
         order.setOrderSn(OrderUtil.genOrderSn());
-        long row = orderMapper.insertSelective(order);
+        long row = orderMapper.insert(order);
         log.info("insert rows:{}", row);
         long orderId = order.getId();
 
         orderConsignee.setOrderId(orderId);
-        orderConsigneeMapper.insertSelective(orderConsignee);
+        orderConsigneeMapper.insert(orderConsignee);
 
         List<OrderItem> orderItems = DOUtils.copyList(orderDTO.getOrderItemList(), OrderItem.class);
         for(OrderItem orderItem : orderItems) {
             orderItem.setOrderId(orderId);
-            orderItemMapper.insertSelective(orderItem);
+            orderItemMapper.insert(orderItem);
         }
 
         orderDTO.setId(orderId);
@@ -108,7 +116,9 @@ public class OrderManagerImpl implements OrderManager {
     }
 
     private void decOneOrderItems(OrderDTO orderDTO) {
-        List<OrderItem> orderItems = orderItemMapper.getListByOrderId(orderDTO.getId());
+        QueryWrapper<OrderItem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("orderId", orderDTO.getId());
+        List<OrderItem> orderItems = orderItemMapper.selectList(queryWrapper);
         Map<Long, List<OrderItemDTO>> orderItemMap = getOrderItemMap(orderItems);
         orderDTO.setOrderItemList(orderItemMap.get(orderDTO.getId()));
     }

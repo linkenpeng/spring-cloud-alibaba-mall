@@ -34,6 +34,10 @@ public class ApiResponse<T> implements Serializable {
         }
     }
 
+    public ApiResponse() {
+
+    }
+
     public ApiResponse(T data){
         this.code = ResponseEnum.SUCCESS.getCode();
         this.msg = ResponseEnum.SUCCESS.getMsg();
