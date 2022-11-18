@@ -6,7 +6,6 @@ import com.intecsec.mall.item.ItemDTO;
 import com.intecsec.mall.item.entity.Item;
 import com.intecsec.mall.item.manager.ItemManager;
 import com.intecsec.mall.item.mapper.ItemMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

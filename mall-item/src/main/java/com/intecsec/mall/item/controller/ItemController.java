@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @RequestMapping("/item")
 public class ItemController {
 
-    @Autowired
+    @Resource
     private ItemManager itemManager;
 
     @RequestMapping(value = "/{itemId}", method = RequestMethod.GET)

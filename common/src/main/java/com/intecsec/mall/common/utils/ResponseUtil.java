@@ -47,7 +47,7 @@ public class ResponseUtil {
     }
 
     public static String fail(ResponseEnum responseEnum) {
-        return fail(responseEnum, responseEnum.getMsg());
+        return fail(responseEnum, responseEnum.getMessage());
     }
 
     public static String fail(ResponseEnum responseEnum, String message) {

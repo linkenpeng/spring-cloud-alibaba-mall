@@ -5,10 +5,10 @@ import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.dto.UserDTO;
 import com.intecsec.mall.user.manager.UserConsigneeManager;
 import com.intecsec.mall.user.manager.UserManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,10 +20,10 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
+    @Resource
     private UserManager userManager;
 
-    @Autowired
+    @Resource
     private UserConsigneeManager userConsigneeManager;
 
     @Value("${server.port}")

@@ -20,7 +20,7 @@ import java.util.Map;
 public class JsonUtils {
 
 	private static final Gson gson;
-	private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss[.SSS]";
+	private static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
 	private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATE_PATTERN);
 
 	static {
@@ -31,7 +31,7 @@ public class JsonUtils {
 		GsonBuilder gb = new GsonBuilder();
 		gb.disableHtmlEscaping();
 		gb.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-		// gb.setDateFormat("yyyy-MM-dd HH:mm:ss");
+		gb.setDateFormat("yyyy-MM-dd HH:mm:ss");
 		gb.registerTypeAdapter(Date.class, new DateSerializer()).setDateFormat(DateFormat.LONG);
 		gb.registerTypeAdapter(Date.class, new DateDeserializer()).setDateFormat(DateFormat.LONG);
 		return gb.create();

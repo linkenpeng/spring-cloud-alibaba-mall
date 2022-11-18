@@ -9,9 +9,9 @@ import com.intecsec.mall.order.service.ItemService;
 import com.intecsec.mall.order.service.UserService;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,13 +26,13 @@ import java.util.Map;
 @RequestMapping("/order")
 public class OrderController {
 
-    @Autowired
+    @Resource
     private OrderManager orderManager;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private ItemService itemService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

@@ -9,10 +9,10 @@ import com.intecsec.mall.user.manager.UserManager;
 import com.intecsec.mall.user.mapper.UserConsigneeMapper;
 import com.intecsec.mall.user.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -25,10 +25,10 @@ import java.util.List;
 @Slf4j
 public class UserManagerImpl implements UserManager {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
-    @Autowired
+    @Resource
     private UserConsigneeMapper userConsigneeMapper;
 
     @Override

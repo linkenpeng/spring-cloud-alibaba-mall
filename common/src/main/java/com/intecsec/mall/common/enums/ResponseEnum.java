@@ -13,11 +13,11 @@ public enum ResponseEnum {
     ;
 
     private int code;
-    private String msg;
+    private String message;
 
-    ResponseEnum(int code, String msg) {
+    ResponseEnum(int code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 
     public int getCode() {
@@ -25,8 +25,8 @@ public enum ResponseEnum {
     }
 
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
 }

@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
- * @description: 输出Json
+ * @description: 输出Api结果
  * @author: peter.peng
  * @create: 2018-11-02 11:04
  **/
@@ -18,7 +18,7 @@ public class ApiResponse<T> implements Serializable {
 
     private int code;
 
-    private String msg;
+    private String message;
 
     private T data;
 
@@ -38,9 +38,9 @@ public class ApiResponse<T> implements Serializable {
 
     }
 
-    public ApiResponse(T data){
+    public ApiResponse(T data) {
         this.code = ResponseEnum.SUCCESS.getCode();
-        this.msg = ResponseEnum.SUCCESS.getMsg();
+        this.message = ResponseEnum.SUCCESS.getMessage();
         this.data = data;
         this.init();
     }
@@ -50,16 +50,16 @@ public class ApiResponse<T> implements Serializable {
         this.totalCount = totalCount;
     }
 
-    public ApiResponse(int code, String msg){
+    public ApiResponse(int code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
         this.init();
     }
 
 
-    public ApiResponse(ResponseEnum responseEnum){
+    public ApiResponse(ResponseEnum responseEnum) {
         this.code = responseEnum.getCode();
-        this.msg = responseEnum.getMsg();
+        this.message = responseEnum.getMessage();
         this.init();
     }
 }
