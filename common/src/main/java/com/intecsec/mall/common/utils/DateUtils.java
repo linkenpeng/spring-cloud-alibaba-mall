@@ -8,7 +8,7 @@ import java.util.Date;
  * @author: peter.peng
  * @create: 2020-04-24 17:10
  **/
-public class DateUtil {
+public class DateUtils {
 
     public static final String YYYYMMDD = "yyyyMMdd";
     public static final String YYYYMMDDHHmmss = "yyyyMMddHHmmss";

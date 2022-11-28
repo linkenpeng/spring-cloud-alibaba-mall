@@ -1,6 +1,6 @@
 package com.intecsec.mall.order.config;
 
-import com.intecsec.mall.order.service.fallback.UserServiceFallack;
+import com.intecsec.mall.order.client.fallback.UserClientFallack;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 public class FeignConfiguration {
 
     @Bean
-    public UserServiceFallack userServiceFallack() {
-        return new UserServiceFallack();
+    public UserClientFallack userServiceFallack() {
+        return new UserClientFallack();
     }
 }

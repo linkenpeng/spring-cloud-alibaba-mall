@@ -1,9 +1,9 @@
-package com.intecsec.mall.user.manager.impl;
+package com.intecsec.mall.user.service.impl;
 
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.entity.UserConsignee;
-import com.intecsec.mall.user.manager.UserConsigneeManager;
+import com.intecsec.mall.user.service.UserConsigneeService;
 import com.intecsec.mall.user.mapper.UserConsigneeMapper;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * @create: 2020-04-04 22:36
  **/
 @Repository
-public class UserConsigneeManagerImpl implements UserConsigneeManager {
+public class UserConsigneeServiceImpl implements UserConsigneeService {
 
     @Resource
     private UserConsigneeMapper userConsigneeMapper;

@@ -1,6 +1,6 @@
 package com.intecsec.mall.order.util;
 
-import com.intecsec.mall.common.utils.DateUtil;
+import com.intecsec.mall.common.utils.DateUtils;
 
 import java.util.Date;
 
@@ -12,7 +12,7 @@ import java.util.Date;
 public class OrderUtil {
 
     public static String genOrderSn() {
-        return DateUtil.formatDate(new Date(), DateUtil.YYYYMMDDHHmmssSSS);
+        return DateUtils.formatDate(new Date(), DateUtils.YYYYMMDDHHmmssSSS);
     }
 
 }

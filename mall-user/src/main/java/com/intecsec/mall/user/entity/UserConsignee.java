@@ -1,5 +1,7 @@
 package com.intecsec.mall.user.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -9,6 +11,7 @@ import java.util.Date;
 @TableName("mall_user_consignee")
 public class UserConsignee {
 
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     private Long userId;

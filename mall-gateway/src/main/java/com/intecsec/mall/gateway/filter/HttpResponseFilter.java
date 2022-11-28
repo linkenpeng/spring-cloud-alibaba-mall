@@ -1,9 +1,6 @@
 package com.intecsec.mall.gateway.filter;
 
-import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.common.utils.GZIPUtils;
-import com.intecsec.mall.common.utils.JsonUtils;
-import com.intecsec.mall.common.utils.ResponseUtil;
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +15,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
-import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -33,14 +29,13 @@ import static org.springframework.cloud.gateway.filter.NettyWriteResponseFilter.
  * @author: peter.peng
  * @create: 2022-11-18 21:43
  **/
-@Component
-public class HttpResponseBodyGlobalFilter implements GlobalFilter, Ordered {
+// @Component
+public class HttpResponseFilter implements GlobalFilter, Ordered {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public int getOrder() {
-        // -1 is response write filter, must be called before that
         return WRITE_RESPONSE_FILTER_ORDER - 2;
     }
 
@@ -94,7 +89,7 @@ public class HttpResponseBodyGlobalFilter implements GlobalFilter, Ordered {
     private String responseConversion(String result) {
         try {
             logger.info("响应结果为：{}", result);
-            return ResponseUtil.success(JsonUtils.parseJson(result, ApiResponse.class));
+            return result;
         } catch (Exception e) {
             logger.error("响应包装转换失败，异常信息为：", e);
             return result;

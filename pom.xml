@@ -50,6 +50,7 @@
         <javax.servlet.version>4.0.1</javax.servlet.version>
         <spring.clound.version>2021.0.1</spring.clound.version>
         <spring.clound.alibaba.version>2021.0.1.0</spring.clound.alibaba.version>
+        <swagger.version>3.0.0</swagger.version>
     </properties>
 
     <dependencyManagement>
@@ -155,6 +156,26 @@
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>${mybatis.generator.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+            <!--<dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>-->
+
+            <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+            <!--<dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>-->
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${swagger.version}</version>
             </dependency>
 
 

@@ -10,7 +10,7 @@ import java.util.UUID;
  * @author: peter.peng
  * @create: 2018-11-02 11:06
  **/
-public class TraceUtil {
+public class TraceUtils {
     private static final String logName = "traceId";
 
     private static ThreadLocal<String> tl = ThreadLocal.withInitial(() -> UUID.randomUUID().toString().replaceAll("-", ""));

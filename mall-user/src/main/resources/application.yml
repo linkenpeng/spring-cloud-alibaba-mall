@@ -20,6 +20,15 @@ spring:
   sleuth:
     sampler:
       percentage: 1.0
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    #  LOWER_CAMEL_CASE userName 默认策略 KEBAB_CASE user-name
+    # LOWER_CASE username SNAKE_CASE user_name UPPER_CAMEL_CASE UserName
+    property-naming-strategy: SNAKE_CASE
+  #mvc:
+  #  pathmatch:
+  #    matching-strategy: ant_path_matcher
 
 # Log
 logging:

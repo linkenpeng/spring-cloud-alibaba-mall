@@ -1,4 +1,4 @@
-package com.intecsec.mall.order.service;
+package com.intecsec.mall.order.client;
 
 import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @create: 2020-03-22 10:28
  **/
 @FeignClient(value = "user-service")
-public interface UserService {
+public interface UserClient {
 
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
     ApiResponse<UserDTO> getUser(@PathVariable("userId") Long userId);

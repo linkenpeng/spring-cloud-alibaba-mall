@@ -1,4 +1,4 @@
-package com.intecsec.mall.item.manager;
+package com.intecsec.mall.item.service;
 
 import com.intecsec.mall.item.ItemDTO;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @author: peter.peng
  * @create: 2020-04-04 22:19
  **/
-public interface ItemManager {
+public interface ItemService {
 
     ItemDTO itemDetail(Long itemId);
 

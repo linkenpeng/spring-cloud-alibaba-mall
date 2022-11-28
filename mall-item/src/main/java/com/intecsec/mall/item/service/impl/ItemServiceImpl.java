@@ -1,10 +1,10 @@
-package com.intecsec.mall.item.manager.impl;
+package com.intecsec.mall.item.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.item.ItemDTO;
 import com.intecsec.mall.item.entity.Item;
-import com.intecsec.mall.item.manager.ItemManager;
+import com.intecsec.mall.item.service.ItemService;
 import com.intecsec.mall.item.mapper.ItemMapper;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @create: 2020-04-04 22:21
  **/
 @Component
-public class ItemManagerImpl implements ItemManager {
+public class ItemServiceImpl implements ItemService {
 
     @Resource
     private ItemMapper itemMapper;

@@ -1,5 +1,6 @@
-package com.intecsec.mall.order.manager;
+package com.intecsec.mall.order.service;
 
+import com.intecsec.mall.order.AddOrderDTO;
 import com.intecsec.mall.order.OrderDTO;
 
 import java.util.List;
@@ -7,9 +8,11 @@ import java.util.List;
 /**
  * @description:
  * @author: peter.peng
- * @create: 2020-04-04 22:24
+ * @create: 2022-11-26 19:28
  **/
-public interface OrderManager {
+public interface OrderService {
+
+    OrderDTO addOrder(AddOrderDTO addOrderDTO);
 
     OrderDTO getOrder(long id);
 
@@ -18,6 +21,4 @@ public interface OrderManager {
     OrderDTO getUserOrder(long id, long userId);
 
     List<OrderDTO> getUserOrderList(int page, int pageSize, long userId);
-
-    OrderDTO addOrder(OrderDTO orderDTO);
 }

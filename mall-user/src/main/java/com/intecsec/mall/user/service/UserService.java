@@ -1,4 +1,4 @@
-package com.intecsec.mall.user.manager;
+package com.intecsec.mall.user.service;
 
 import com.intecsec.mall.user.dto.UserDTO;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @author: peter.peng
  * @create: 2020-04-04 22:36
  **/
-public interface UserManager {
+public interface UserService {
 
     UserDTO getUser(Long userId);
 

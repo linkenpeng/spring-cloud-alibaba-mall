@@ -1,11 +1,11 @@
-package com.intecsec.mall.user.manager.impl;
+package com.intecsec.mall.user.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.user.dto.UserDTO;
 import com.intecsec.mall.user.entity.User;
 import com.intecsec.mall.user.entity.UserConsignee;
-import com.intecsec.mall.user.manager.UserManager;
+import com.intecsec.mall.user.service.UserService;
 import com.intecsec.mall.user.mapper.UserConsigneeMapper;
 import com.intecsec.mall.user.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import java.util.List;
  **/
 @Repository
 @Slf4j
-public class UserManagerImpl implements UserManager {
+public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;

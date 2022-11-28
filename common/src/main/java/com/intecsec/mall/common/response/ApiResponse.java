@@ -1,7 +1,7 @@
 package com.intecsec.mall.common.response;
 
 import com.intecsec.mall.common.enums.ResponseEnum;
-import com.intecsec.mall.common.utils.TraceUtil;
+import com.intecsec.mall.common.utils.TraceUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +16,8 @@ import java.io.Serializable;
 @Setter
 public class ApiResponse<T> implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private int code;
 
     private String message;
@@ -28,7 +30,7 @@ public class ApiResponse<T> implements Serializable {
 
     private void init() {
         try {
-            this.traceId = TraceUtil.currentTraceId();
+            this.traceId = TraceUtils.currentTraceId();
         } catch (Exception e) {
 
         }

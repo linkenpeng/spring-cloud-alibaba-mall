@@ -1,7 +1,7 @@
-package com.intecsec.mall.order.service.fallback;
+package com.intecsec.mall.order.client.fallback;
 
 import com.intecsec.mall.common.response.ApiResponse;
-import com.intecsec.mall.order.service.UserService;
+import com.intecsec.mall.order.client.UserClient;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.dto.UserDTO;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author: peter.peng
  * @create: 2022-07-24 11:31
  **/
-public class UserServiceFallack implements UserService {
+public class UserClientFallack implements UserClient {
 
     @Override
     public ApiResponse<UserDTO> getUser(@PathVariable("userId") Long userId) {
