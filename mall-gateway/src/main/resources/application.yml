@@ -12,19 +12,36 @@ spring:
     name: gateway-service
   profiles:
     active: local
+  redis:
+    host: localhost
+    port: 6379
+    password: redis@com
   cloud:
 # https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/
     gateway:
-#      default-filters: Y-Foo, Bar
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
       discovery:
         locator:
           enabled: true
       routes:
         - id: order
           uri: lb://order-service:2300
-#          uri: http://localhost:2300
           predicates:
             - Path=/order/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
 
 #  zipkin:
 #    base-url: http://zipkin.server:30774/

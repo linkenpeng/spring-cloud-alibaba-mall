@@ -13,6 +13,7 @@
 
     <dependencies>
 
+        <!-- start-gateway 与 starter-web、starter-actuator 冲突，因此不能引入 -->
         <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -22,14 +23,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         -->
 
-        <!-- start-gateway 与 starter-web、starter-actuator 冲突，因此不能引入 -->
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
@@ -44,6 +44,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
         </dependency>
 
         <dependency>

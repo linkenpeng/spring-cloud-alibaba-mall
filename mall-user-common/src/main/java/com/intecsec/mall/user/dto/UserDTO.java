@@ -25,6 +25,8 @@ public class UserDTO implements Serializable {
 
     private String avatar;
 
+    private Integer role;
+
     private Date gmtCreated;
 
     private Date gmtUpdate;

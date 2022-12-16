@@ -16,11 +16,15 @@ public class User {
 
     private String password;
 
+    private String salt;
+
     private Integer age;
 
     private String nickName;
 
     private String avatar;
+
+    private Integer role;
 
     @Version
     @TableField(fill = FieldFill.INSERT)

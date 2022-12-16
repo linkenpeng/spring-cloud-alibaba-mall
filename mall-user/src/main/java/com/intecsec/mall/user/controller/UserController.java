@@ -3,6 +3,7 @@ package com.intecsec.mall.user.controller;
 import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.dto.UserDTO;
+import com.intecsec.mall.user.dto.UserLoginDTO;
 import com.intecsec.mall.user.service.UserConsigneeService;
 import com.intecsec.mall.user.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +30,18 @@ public class UserController {
     @Value("${server.port}")
     private int serverPort = 0;
 
-    // @ApiOperation(value = "查询所有的用户信息")
+    @PostMapping("/register")
+    public ApiResponse<Integer> register(@RequestBody UserDTO userDTO) {
+        int add = userService.add(userDTO);
+        return new ApiResponse<>(add);
+    }
+
+    @PostMapping("/login")
+    public ApiResponse<UserLoginDTO> login(@RequestBody UserDTO userDTO) {
+        UserLoginDTO userLoginDTO = userService.login(userDTO);
+        return new ApiResponse<>(userLoginDTO);
+    }
+
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public ApiResponse<UserDTO> getUser(@PathVariable Long userId) {
         UserDTO userDTO = userService.getUser(userId);
@@ -37,7 +49,6 @@ public class UserController {
         return new ApiResponse(userDTO);
     }
 
-    // @ApiOperation(value = "查询所有的用户信息")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ApiResponse<List<UserDTO>> getUserList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                      @RequestParam(value = "pageSize", required = false, defaultValue = "2") int pageSize) {
