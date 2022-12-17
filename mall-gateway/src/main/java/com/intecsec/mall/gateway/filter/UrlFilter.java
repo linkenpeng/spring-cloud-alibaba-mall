@@ -21,7 +21,7 @@ public class UrlFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        log.info("经过第2个过滤器UrlFilter");
+        log.info("经过第{}个过滤器UrlFilter", getOrder());
         ServerHttpRequest request = exchange.getRequest();
         String url = request.getURI().getPath();
         log.info("url:" + url);
@@ -30,6 +30,6 @@ public class UrlFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return 2;
+        return FilterOrders.UrlFilter;
     }
 }

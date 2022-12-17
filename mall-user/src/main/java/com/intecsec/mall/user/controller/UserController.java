@@ -4,9 +4,9 @@ import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.dto.UserDTO;
 import com.intecsec.mall.user.dto.UserLoginDTO;
+import com.intecsec.mall.user.dto.UserLoginResultDTO;
 import com.intecsec.mall.user.service.UserConsigneeService;
 import com.intecsec.mall.user.service.UserService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -27,25 +27,21 @@ public class UserController {
     @Resource
     private UserConsigneeService userConsigneeService;
 
-    @Value("${server.port}")
-    private int serverPort = 0;
-
     @PostMapping("/register")
-    public ApiResponse<Integer> register(@RequestBody UserDTO userDTO) {
-        int add = userService.add(userDTO);
+    public ApiResponse<Integer> register(@RequestBody UserLoginDTO userLoginDTO) {
+        int add = userService.add(userLoginDTO);
         return new ApiResponse<>(add);
     }
 
     @PostMapping("/login")
-    public ApiResponse<UserLoginDTO> login(@RequestBody UserDTO userDTO) {
-        UserLoginDTO userLoginDTO = userService.login(userDTO);
-        return new ApiResponse<>(userLoginDTO);
+    public ApiResponse<UserLoginResultDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
+        UserLoginResultDTO userLoginResultDTO = userService.login(userLoginDTO);
+        return new ApiResponse<>(userLoginResultDTO);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public ApiResponse<UserDTO> getUser(@PathVariable Long userId) {
         UserDTO userDTO = userService.getUser(userId);
-        userDTO.setUserServicePort(serverPort);
         return new ApiResponse(userDTO);
     }
 

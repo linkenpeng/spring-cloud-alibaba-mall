@@ -51,6 +51,7 @@
         <spring.clound.version>2021.0.1</spring.clound.version>
         <spring.clound.alibaba.version>2021.0.1.0</spring.clound.alibaba.version>
         <swagger.version>3.0.0</swagger.version>
+        <jjwt.version>0.9.1</jjwt.version>
     </properties>
 
     <dependencyManagement>
@@ -176,6 +177,13 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${swagger.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
             </dependency>
 
 

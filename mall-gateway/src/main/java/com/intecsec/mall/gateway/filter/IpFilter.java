@@ -22,7 +22,7 @@ public class IpFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        log.info("经过第1个过滤器IpFilter");
+        log.info("经过第{}个过滤器IpFilter", getOrder());
         ServerHttpRequest request = exchange.getRequest();
         InetSocketAddress remoteAddress = request.getRemoteAddress();
         log.info("ip:" + remoteAddress.getHostName());
@@ -31,6 +31,6 @@ public class IpFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return 1;
+        return FilterOrders.IpFilter;
     }
 }

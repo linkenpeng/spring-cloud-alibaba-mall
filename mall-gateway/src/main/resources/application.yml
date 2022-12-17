@@ -32,6 +32,10 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: user
+          uri: lb://user-service:2100
+          predicates:
+            - Path=/user/**
         - id: order
           uri: lb://order-service:2300
           predicates:
@@ -42,7 +46,6 @@ spring:
                 key-resolver: "#{@ipKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 1
-
 #  zipkin:
 #    base-url: http://zipkin.server:30774/
 #  sleuth:

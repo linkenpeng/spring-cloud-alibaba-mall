@@ -1,6 +1,7 @@
 package com.intecsec.mall.gateway.filter;
 
 import com.intecsec.mall.common.utils.GZIPUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,26 +23,25 @@ import reactor.core.publisher.Mono;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import static org.springframework.cloud.gateway.filter.NettyWriteResponseFilter.WRITE_RESPONSE_FILTER_ORDER;
-
 /**
  * @description: 响应体转换处理
  * @author: peter.peng
  * @create: 2022-11-18 21:43
  **/
 // @Component
+@Slf4j
 public class HttpResponseFilter implements GlobalFilter, Ordered {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public int getOrder() {
-        return WRITE_RESPONSE_FILTER_ORDER - 2;
+        return FilterOrders.HttpResponseFilter;
     }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        logger.info("global filter HttpResponseBody，processing response results");
+        log.info("经过第{}个过滤器HttpResponseFilter", getOrder());
 
         // 这里可以增加一些业务判断条件，进行跳过处理
 

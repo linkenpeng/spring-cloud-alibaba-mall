@@ -5,22 +5,18 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @description:
+ * @description: 注册登录前端传参
  * @author: peter.peng
  * @create: 2022-12-16 23:16
  **/
 @Data
 public class UserLoginDTO implements Serializable {
 
-    private static final long serialVersionUID = -1L;
-
-    private String accessToken;
+    private static final long serialVersionUID = -5824026399940591286L;
 
     private String userName;
 
-    private String nickName;
-
-    private String avatar;
+    private String password;
 
     private Integer role;
 }

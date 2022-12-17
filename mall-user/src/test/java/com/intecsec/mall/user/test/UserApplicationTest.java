@@ -4,14 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intecsec.mall.user.entity.User;
 import com.intecsec.mall.user.mapper.UserMapper;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @description:
@@ -23,6 +24,25 @@ public class UserApplicationTest {
 
     @Resource
     private UserMapper userMapper;
+
+    @Test
+    public void testJJWT() {
+        long currentTimeMillis = System.currentTimeMillis();
+        currentTimeMillis += 1000000L;
+        Date date = new Date(currentTimeMillis);
+        String secret = "it's a secret";
+        JwtBuilder jwtBuilder = Jwts.builder().setId("123")
+                .setSubject("peter")
+                .setIssuedAt(new Date())
+                .setExpiration(date)
+                .claim("roles", "admin")
+                .signWith(SignatureAlgorithm.HS256, secret);
+        String compact = jwtBuilder.compact();
+        System.out.println(compact);
+
+        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(compact).getBody();
+        System.out.println(claims);
+    }
 
     @Test
     public void testWrapper() {
