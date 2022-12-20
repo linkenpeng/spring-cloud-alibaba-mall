@@ -2,7 +2,7 @@ package com.intecsec.mall.item.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intecsec.mall.common.utils.DOUtils;
-import com.intecsec.mall.item.ItemDTO;
+import com.intecsec.mall.item.dto.ItemDTO;
 import com.intecsec.mall.item.entity.Item;
 import com.intecsec.mall.item.service.ItemService;
 import com.intecsec.mall.item.mapper.ItemMapper;

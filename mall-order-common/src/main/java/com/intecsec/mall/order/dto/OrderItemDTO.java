@@ -1,4 +1,4 @@
-package com.intecsec.mall.order;
+package com.intecsec.mall.order.dto;
 
 import lombok.Data;
 

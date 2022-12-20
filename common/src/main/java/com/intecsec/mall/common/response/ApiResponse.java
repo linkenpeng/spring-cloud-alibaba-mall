@@ -1,6 +1,7 @@
 package com.intecsec.mall.common.response;
 
 import com.intecsec.mall.common.enums.ResponseEnum;
+import com.intecsec.mall.common.exception.IResponseEnum;
 import com.intecsec.mall.common.utils.TraceUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -59,7 +60,7 @@ public class ApiResponse<T> implements Serializable {
     }
 
 
-    public ApiResponse(ResponseEnum responseEnum) {
+    public ApiResponse(IResponseEnum responseEnum) {
         this.code = responseEnum.getCode();
         this.message = responseEnum.getMessage();
         this.init();

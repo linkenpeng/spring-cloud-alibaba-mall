@@ -1,7 +1,7 @@
 package com.intecsec.mall.order.client;
 
 import com.intecsec.mall.common.response.ApiResponse;
-import com.intecsec.mall.item.ItemDTO;
+import com.intecsec.mall.item.dto.ItemDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

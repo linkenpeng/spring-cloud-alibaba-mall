@@ -1,6 +1,6 @@
 package com.intecsec.mall.item.service;
 
-import com.intecsec.mall.item.ItemDTO;
+import com.intecsec.mall.item.dto.ItemDTO;
 
 import java.util.List;
 

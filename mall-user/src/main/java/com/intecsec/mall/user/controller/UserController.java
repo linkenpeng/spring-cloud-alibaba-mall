@@ -1,5 +1,6 @@
 package com.intecsec.mall.user.controller;
 
+import com.intecsec.mall.common.exception.BaseException;
 import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.dto.UserDTO;
@@ -29,7 +30,12 @@ public class UserController {
 
     @PostMapping("/register")
     public ApiResponse<Integer> register(@RequestBody UserLoginDTO userLoginDTO) {
-        int add = userService.add(userLoginDTO);
+        int add = 0;
+        try {
+            add = userService.add(userLoginDTO);
+        } catch (BaseException e) {
+            return new ApiResponse<>(e.getCode(), e.getMessage());
+        }
         return new ApiResponse<>(add);
     }
 

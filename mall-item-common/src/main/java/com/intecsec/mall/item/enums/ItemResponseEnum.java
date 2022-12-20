@@ -1,4 +1,4 @@
-package com.intecsec.mall.common.enums;
+package com.intecsec.mall.item.enums;
 
 import com.intecsec.mall.common.exception.IResponseEnum;
 import lombok.AllArgsConstructor;
@@ -11,10 +11,15 @@ import lombok.Getter;
  **/
 @Getter
 @AllArgsConstructor
-public enum ResponseEnum implements IResponseEnum {
-    SUCCESS(10000, "请求处理成功"),
-    SYSTEM_ERROR(50000, "系统错误"),
+public enum ItemResponseEnum implements IResponseEnum {
+
+    ADD_ITEM_FAIL(60001, "添加商品失败"),
+
+    STOCK_NOT_ENOUGH(60002, "库存不足"),
+
     ;
+
     private int code;
+
     private String message;
 }

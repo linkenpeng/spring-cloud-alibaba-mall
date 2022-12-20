@@ -1,5 +1,6 @@
 package com.intecsec.mall.user.service;
 
+import com.intecsec.mall.common.exception.BaseException;
 import com.intecsec.mall.user.dto.UserDTO;
 import com.intecsec.mall.user.dto.UserLoginDTO;
 import com.intecsec.mall.user.dto.UserLoginResultDTO;
@@ -17,7 +18,7 @@ public interface UserService {
 
     List<UserDTO> getUserList(int page, int pageSize);
 
-    int add(UserLoginDTO userDTO);
+    int add(UserLoginDTO userDTO) throws BaseException;
 
     UserLoginResultDTO login(UserLoginDTO userDTO);
 

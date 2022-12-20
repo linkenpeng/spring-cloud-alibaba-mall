@@ -1,7 +1,7 @@
 package com.intecsec.mall.item.controller;
 
 import com.intecsec.mall.common.response.ApiResponse;
-import com.intecsec.mall.item.ItemDTO;
+import com.intecsec.mall.item.dto.ItemDTO;
 import com.intecsec.mall.item.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;

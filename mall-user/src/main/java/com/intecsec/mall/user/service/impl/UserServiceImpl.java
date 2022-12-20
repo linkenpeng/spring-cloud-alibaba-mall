@@ -2,6 +2,7 @@ package com.intecsec.mall.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.intecsec.mall.common.exception.BaseException;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.common.utils.JwtUtil;
 import com.intecsec.mall.user.dto.UserDTO;
@@ -10,6 +11,7 @@ import com.intecsec.mall.user.dto.UserLoginResultDTO;
 import com.intecsec.mall.user.entity.User;
 import com.intecsec.mall.user.entity.UserConsignee;
 import com.intecsec.mall.user.enums.RoleEnum;
+import com.intecsec.mall.user.enums.UserResponseEnum;
 import com.intecsec.mall.user.service.UserService;
 import com.intecsec.mall.user.mapper.UserConsigneeMapper;
 import com.intecsec.mall.user.mapper.UserMapper;
@@ -53,10 +55,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int add(UserLoginDTO userLoginDTO) {
+    public int add(UserLoginDTO userLoginDTO)  throws BaseException {
         User user = getUserByUserName(userLoginDTO);
         if (user != null) {
-            return 0;
+            throw new BaseException(UserResponseEnum.USER_EXISTS);
         }
 
         String salt = BCrypt.gensalt();

@@ -1,7 +1,7 @@
 package com.intecsec.mall.order.service;
 
-import com.intecsec.mall.order.AddOrderDTO;
-import com.intecsec.mall.order.OrderDTO;
+import com.intecsec.mall.order.dto.AddOrderDTO;
+import com.intecsec.mall.order.dto.OrderDTO;
 
 import java.util.List;
 

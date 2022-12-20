@@ -1,4 +1,4 @@
-package com.intecsec.mall.item;
+package com.intecsec.mall.item.dto;
 
 import lombok.Data;
 

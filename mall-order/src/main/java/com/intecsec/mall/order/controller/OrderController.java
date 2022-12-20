@@ -1,8 +1,8 @@
 package com.intecsec.mall.order.controller;
 
 import com.intecsec.mall.common.response.ApiResponse;
-import com.intecsec.mall.order.AddOrderDTO;
-import com.intecsec.mall.order.OrderDTO;
+import com.intecsec.mall.order.dto.AddOrderDTO;
+import com.intecsec.mall.order.dto.OrderDTO;
 import com.intecsec.mall.order.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 

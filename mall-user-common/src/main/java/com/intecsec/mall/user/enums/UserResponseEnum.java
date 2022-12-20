@@ -1,4 +1,4 @@
-package com.intecsec.mall.common.enums;
+package com.intecsec.mall.user.enums;
 
 import com.intecsec.mall.common.exception.IResponseEnum;
 import lombok.AllArgsConstructor;
@@ -11,10 +11,13 @@ import lombok.Getter;
  **/
 @Getter
 @AllArgsConstructor
-public enum ResponseEnum implements IResponseEnum {
-    SUCCESS(10000, "请求处理成功"),
-    SYSTEM_ERROR(50000, "系统错误"),
+public enum UserResponseEnum implements IResponseEnum {
+
+    USER_EXISTS(20001, "用户已存在"),
+
     ;
+
     private int code;
+
     private String message;
 }
