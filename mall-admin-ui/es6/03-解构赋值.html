@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       let a = 1, b = 2, c = 3
+       console.log(a, b, c)
+
+       let [x, y, z] = [1, 2, 3]
+       console.log(x, y, z)
+
+       let user = {"name": "linken", "age": 18}
+       let name1 = user.name
+       let age1 = user.age
+       console.log(name1, age1)
+
+       // 必须是对象的属性
+       let {name, age} = user
+       console.log(name, age)
+
+    </script>
+</body>
+</html>
