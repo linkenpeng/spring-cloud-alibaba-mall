@@ -1,6 +1,5 @@
 package com.intecsec.mall.common.exception;
 
-import com.intecsec.mall.common.enums.ResponseEnum;
 import lombok.Getter;
 
 /**
@@ -9,7 +8,7 @@ import lombok.Getter;
  * @create: 2022-12-18 09:50
  **/
 @Getter
-public class BaseException extends Exception {
+public class BaseException extends RuntimeException {
     private int code;
 
     public BaseException(IResponseEnum responseEnum, String message) {

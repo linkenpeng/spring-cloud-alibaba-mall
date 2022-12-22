@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @author: peter.peng
  * @create: 2020-03-22 10:03
  **/
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.intecsec.mall"})
 @EnableDiscoveryClient
 @EnableFeignClients
 public class OrderApplication {

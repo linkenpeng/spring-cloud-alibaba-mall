@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @author: peter.peng
  * @create: 2020-03-22 10:03
  **/
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.intecsec.mall"})
 @EnableDiscoveryClient
 public class ItemApplication {
     public static void main(String[] args) {
