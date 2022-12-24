@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- submit -->
+        <button v-on:click="show()">事件绑定</button>
+        <!-- 简写 -->
+        <button @click="show()">事件绑定</button>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                keyword: '小A学编程'
+            },
+            methods:{
+                show() {
+                    console.log("show")
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-for="user in userLis">
+            {{user.name}} - {{user.age}}
+        </div>
+
+        <div v-for="(user,index) in userLis">
+            [{{index}}] {{user.name}} - {{user.age}}
+        </div>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                userLis: [
+                    {"name":"linken", "age":18},
+                    {"name":"peter", "age":22},
+                ]
+            }
+        })
+    </script>
+</body>
+</html>
