@@ -12,3 +12,5 @@ logs/
 /*.iml
 mvnw
 mvnw.cmd
+
+mall-admin-ui/node_modules

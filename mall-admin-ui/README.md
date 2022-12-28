@@ -1,67 +1,99 @@
-https://nodejs.org/en/
-https://vuejs.org/
-https://unpkg.com/browse/axios@1.1.2/
+# vue-admin-template
 
-```javascript
-// 配置国内镜像
-npm config set registry https://registry.npm.taobao.org
-npm config list
+English | [简体中文](./README-zh.md)
 
-// 初始化
-npm init
-npm init -y 
+> A minimal vue admin template with Element UI & axios & iconfont & permission control & lint
 
-// 安装包
-npm install packge_name // 安装指定类库
-npm install // 安装配置文件的类库
+**Live demo:** http://panjiachen.github.io/vue-admin-template
 
-// 全局安装
-npm install --global package_name
-npm install -g package_name 
 
-// 开发安装
-npm install --save-dev package_name 
-npm install -D package_name 
+**The current version is `v4.0+` build on `vue-cli`. If you want to use the old version , you can switch branch to [tag/3.11.0](https://github.com/PanJiaChen/vue-admin-template/tree/tag/3.11.0), it does not rely on `vue-cli`**
 
-// 更新
-npm update package_name
-npm update -g package_name
+<p align="center">
+  <b>SPONSORED BY</b>
+</p>
+<p align="center">
+   <a href="https://finclip.com?from=vue_element" title="FinClip" target="_blank">
+      <img height="200px" src="https://gitee.com/panjiachen/gitee-cdn/raw/master/vue%E8%B5%9E%E5%8A%A9.png" title="FinClip">
+   </a>
+</p>
 
-// 卸载
-npm uninstall package_name
-npm uninstall -g package_name
+## Build Setup
+
+```bash
+# clone the project
+git clone https://github.com/PanJiaChen/vue-admin-template.git
+
+# enter the project directory
+cd vue-admin-template
+
+# install dependency
+npm install
+
+# develop
+npm run dev
 ```
 
-##### 转码babel
+This will automatically open http://localhost:9528
 
-```javascript
-// nodejs 无法直接执行模块化的代码，需要转换为es5，使用babel转换
-npm install -g babel-cli
-babel --version
+## Build
 
-// 编写.babelrc, 放置在项目的根目录下
-{
-    "presets": ["es2015"],
-    "plugins": []
-}
+```bash
+# build for test environment
+npm run build:stage
 
-// 安装转码器
-npm install -D babel-preset-es2015
-
-// 转码
-babel src -d dist
+# build for production environment
+npm run build:prod
 ```
 
-##### webpack打包
-```javascript
-// 安装工具
-npm install -g webpack webpack-cli
+## Advanced
 
-webpack --mode=development
+```bash
+# preview the release environment effect
+npm run preview
 
-// 安装css打包工具
-npm install -D style-loader css-loader
+# preview the release environment effect + static resource analysis
+npm run preview -- --report
 
-webpack --mode=development
+# code format check
+npm run lint
 
+# code format check and auto fix
+npm run lint -- --fix
 ```
+
+Refer to [Documentation](https://panjiachen.github.io/vue-element-admin-site/guide/essentials/deploy.html) for more information
+
+## Demo
+
+![demo](https://github.com/PanJiaChen/PanJiaChen.github.io/blob/master/images/demo.gif)
+
+## Extra
+
+If you want router permission && generate menu by user roles , you can use this branch [permission-control](https://github.com/PanJiaChen/vue-admin-template/tree/permission-control)
+
+For `typescript` version, you can use [vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template) (Credits: [@Armour](https://github.com/Armour))
+
+## Related Project
+
+- [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+
+- [electron-vue-admin](https://github.com/PanJiaChen/electron-vue-admin)
+
+- [vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template)
+
+- [awesome-project](https://github.com/PanJiaChen/vue-element-admin/issues/2312)
+
+## Browsers support
+
+Modern browsers and Internet Explorer 10+.
+
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
+| --------- | --------- | --------- | --------- |
+| IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions
+
+## License
+
+[MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
+
+Copyright (c) 2017-present PanJiaChen
