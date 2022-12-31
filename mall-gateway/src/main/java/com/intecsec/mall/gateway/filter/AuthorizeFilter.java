@@ -4,6 +4,7 @@ import com.intecsec.mall.common.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -27,6 +28,12 @@ import java.util.Set;
 @Slf4j
 public class AuthorizeFilter implements GlobalFilter, Ordered {
     private static final String AUTHORIZE_TOKEN = "token";
+
+    private static final String NEED_TOKEN_ENV = "online";
+
+    @Value("${spring.profiles.active}")
+    private String env;
+
     private static final Set<String> NO_NEED_TOKEN = new HashSet<>();
     static {
         NO_NEED_TOKEN.add("/user/login");
@@ -35,7 +42,7 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        log.info("经过第{}个过滤器AuthorizeFilter", getOrder());
+        log.info("经过第{}个过滤器AuthorizeFilter, env:{}", getOrder(), env);
 
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
@@ -49,22 +56,24 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
             }
         }
 
-        HttpHeaders headers = request.getHeaders();
-        String token = headers.getFirst(AUTHORIZE_TOKEN);
-        log.info("token:{}", token);
+        if(NEED_TOKEN_ENV.equals(env)) {
+            HttpHeaders headers = request.getHeaders();
+            String token = headers.getFirst(AUTHORIZE_TOKEN);
+            log.info("token:{}", token);
 
-        if (StringUtils.isEmpty(token)) {
-            response.setStatusCode(HttpStatus.UNAUTHORIZED);
-            return response.setComplete();
-        }
+            if (StringUtils.isEmpty(token)) {
+                response.setStatusCode(HttpStatus.UNAUTHORIZED);
+                return response.setComplete();
+            }
 
-        try {
-            Claims claims = JwtUtil.parseJWT(token);
-            log.info("claims:{}", claims);
-        } catch (Exception e) {
-            log.error("解析token出错", e);
-            response.setStatusCode(HttpStatus.UNAUTHORIZED);
-            return response.setComplete();
+            try {
+                Claims claims = JwtUtil.parseJWT(token);
+                log.info("claims:{}", claims);
+            } catch (Exception e) {
+                log.error("解析token出错", e);
+                response.setStatusCode(HttpStatus.UNAUTHORIZED);
+                return response.setComplete();
+            }
         }
 
         return chain.filter(exchange);

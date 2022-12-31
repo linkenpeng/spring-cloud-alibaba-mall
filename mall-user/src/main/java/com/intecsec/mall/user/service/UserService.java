@@ -22,6 +22,8 @@ public interface UserService {
 
     UserLoginResultDTO login(UserLoginDTO userDTO);
 
+    UserLoginResultDTO getUserByToken(String token);
+
     int update(Long userId, UserDTO userDTO);
 
     int delete(Long userId);

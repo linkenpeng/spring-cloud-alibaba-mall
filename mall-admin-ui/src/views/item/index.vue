@@ -1,27 +1,33 @@
 <template>
   <div class="app-container">
-    商品列表
+    <el-table
+      :data="list"
+      style="width: 100%">
+      <el-table-column
+        prop="item_image"
+        label="商品图片"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="item_name"
+        label="商品名"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="item_price"
+        label="商品价格">
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getItemList } from '@/api/item'
 
 export default {
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
-      }
-      return statusMap[status]
-    }
-  },
   data() {
     return {
-      list: null,
-      listLoading: true
+      list: []
     }
   },
   created() {
@@ -29,10 +35,9 @@ export default {
   },
   methods: {
     fetchData() {
-      this.listLoading = true
-      getList().then(response => {
-        this.list = response.data.items
-        this.listLoading = false
+      getItemList().then(response => {
+        console.log(response.data)
+        this.list = response.data
       })
     }
   }

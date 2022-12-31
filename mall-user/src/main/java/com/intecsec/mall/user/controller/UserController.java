@@ -1,12 +1,15 @@
 package com.intecsec.mall.user.controller;
 
 import com.intecsec.mall.common.response.ApiResponse;
+import com.intecsec.mall.common.utils.JwtUtil;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.dto.UserDTO;
 import com.intecsec.mall.user.dto.UserLoginDTO;
 import com.intecsec.mall.user.dto.UserLoginResultDTO;
 import com.intecsec.mall.user.service.UserConsigneeService;
 import com.intecsec.mall.user.service.UserService;
+import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,7 +22,8 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/user")
-@ControllerAdvice
+@Slf4j
+ // @CrossOrigin
 public class UserController {
 
     @Resource
@@ -38,6 +42,19 @@ public class UserController {
     public ApiResponse<UserLoginResultDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
         UserLoginResultDTO userLoginResultDTO = userService.login(userLoginDTO);
         return new ApiResponse<>(userLoginResultDTO);
+    }
+
+    @PostMapping("/logout")
+    public ApiResponse<Boolean> logout(@RequestParam(value = "token", required = false) String token) {
+        log.info("token:{}", token);
+        return new ApiResponse<>(true);
+    }
+
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public ApiResponse<UserLoginResultDTO> getUserByToken(@RequestParam(value = "token") String token) {
+        log.info("token:{}", token);
+        UserLoginResultDTO userDTO = userService.getUserByToken(token);
+        return new ApiResponse(userDTO);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
@@ -65,7 +82,7 @@ public class UserController {
         return new ApiResponse(id);
     }
 
-    @RequestMapping(value = "/consigee/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/consignee/{id}", method = RequestMethod.GET)
     public ApiResponse<UserConsigneeDTO> getUserConsignee(@PathVariable Long id) {
         UserConsigneeDTO userConsigneeDTO = userConsigneeService.getOne(id);
         return new ApiResponse(userConsigneeDTO);

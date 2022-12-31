@@ -22,7 +22,14 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "*"
+            # 允许携带认证信息
+            allow-credentials: true
+            # 允许跨域的源(网站域名/ip)，设置*为全部
+            # allowedOrigins: "*"
+            allowedOriginPatterns: "*"
+            # 允许跨域请求里的head字段，设置*为全部
+            allowedHeaders: "*"
+            # 允许跨域的method， 默认为GET和OPTIONS，设置*为全部
             allowedMethods:
               - GET
               - PUT
@@ -36,6 +43,10 @@ spring:
           uri: lb://user-service:2100
           predicates:
             - Path=/user/**
+        - id: item
+          uri: lb://item-service:2200
+          predicates:
+            - Path=/item/**
         - id: order
           uri: lb://order-service:2300
           predicates:

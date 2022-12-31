@@ -12,7 +12,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ResponseEnum implements IResponseEnum {
-    SUCCESS(10000, "请求处理成功"),
+    SUCCESS(20000, "请求处理成功"),
     SYSTEM_ERROR(50000, "系统错误"),
     ;
     private int code;

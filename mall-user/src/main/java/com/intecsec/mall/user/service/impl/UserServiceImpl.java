@@ -15,6 +15,7 @@ import com.intecsec.mall.user.enums.UserResponseEnum;
 import com.intecsec.mall.user.service.UserService;
 import com.intecsec.mall.user.mapper.UserConsigneeMapper;
 import com.intecsec.mall.user.mapper.UserMapper;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
@@ -81,11 +82,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserLoginResultDTO login(UserLoginDTO userLoginDTO) {
-        UserLoginResultDTO userLoginResultDTO = new UserLoginResultDTO();
+        UserLoginResultDTO userLoginResultDTO;
 
         User user = getUserByUserName(userLoginDTO);
         if (user == null) {
-            return userLoginResultDTO;
+            throw new BaseException(UserResponseEnum.USER_NOT_EXISTS);
         }
 
         boolean isValidPassword = BCrypt.checkpw(userLoginDTO.getPassword(), user.getPassword());
@@ -93,8 +94,32 @@ public class UserServiceImpl implements UserService {
         if(isValidPassword) {
             userLoginResultDTO = DOUtils.copy(user, UserLoginResultDTO.class);
             String token = JwtUtil.createJWT(UUID.randomUUID().toString(), user.getUserName(), 3600 * 1000L);
+
+            // TODO 将token和userId建议映射关系
+
+
             userLoginResultDTO.setAccessToken(token);
+        } else {
+            throw new BaseException(UserResponseEnum.PASSWORD_INVALID);
         }
+
+        return userLoginResultDTO;
+    }
+
+    @Override
+    public UserLoginResultDTO getUserByToken(String token) {
+        Claims claims = JwtUtil.parseJWT(token);
+        log.info("claims:{}", claims);
+
+        // TODO 用token从redis换回userId
+        UserDTO userDTO = getUser(19L);
+
+        UserLoginResultDTO userLoginResultDTO = new UserLoginResultDTO();
+        userLoginResultDTO.setAccessToken(token);
+        userLoginResultDTO.setUserName(userDTO.getUserName());
+        userLoginResultDTO.setAvatar(userDTO.getAvatar());
+        userLoginResultDTO.setNickName(userDTO.getNickName());
+        userLoginResultDTO.setRole(userDTO.getRole());
 
         return userLoginResultDTO;
     }
