@@ -53,6 +53,12 @@
             <type>pom</type>
         </dependency>
 
+        <!-- 缓存redis -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>common-redis</artifactId>
+        </dependency>
+
 
 
     </dependencies>

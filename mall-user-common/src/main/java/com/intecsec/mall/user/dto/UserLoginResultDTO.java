@@ -14,7 +14,7 @@ public class UserLoginResultDTO implements Serializable {
 
     private static final long serialVersionUID = -5476406287148372217L;
     
-    private String accessToken;
+    private String token;
 
     private String userName;
 

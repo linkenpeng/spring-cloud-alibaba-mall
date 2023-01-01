@@ -14,10 +14,9 @@ import lombok.Getter;
 public enum UserResponseEnum implements IResponseEnum {
 
     USER_EXISTS(20001, "用户已存在"),
-
     USER_NOT_EXISTS(20002, "用户不存在"),
-
     PASSWORD_INVALID(20003, "密码不正确"),
+    LOGIN_TOKEN_INVALID(20004, "登录信息无效"),
 
     ;
 

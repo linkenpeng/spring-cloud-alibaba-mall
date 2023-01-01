@@ -15,8 +15,10 @@ import com.intecsec.mall.user.enums.UserResponseEnum;
 import com.intecsec.mall.user.service.UserService;
 import com.intecsec.mall.user.mapper.UserConsigneeMapper;
 import com.intecsec.mall.user.mapper.UserMapper;
+import com.intecsec.mall.redis.RedisManager;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -40,6 +43,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserConsigneeMapper userConsigneeMapper;
+
+    @Resource
+    private RedisManager redisManager;
 
     @Override
     public UserDTO getUser(Long userId) {
@@ -93,12 +99,13 @@ public class UserServiceImpl implements UserService {
         log.info("isValidPassword:{}", isValidPassword);
         if(isValidPassword) {
             userLoginResultDTO = DOUtils.copy(user, UserLoginResultDTO.class);
-            String token = JwtUtil.createJWT(UUID.randomUUID().toString(), user.getUserName(), 3600 * 1000L);
+            String accessToken = UUID.randomUUID().toString().replace("-", "");
+            String token = JwtUtil.createJWT(accessToken, user.getUserName(), 3600 * 1000L);
 
-            // TODO 将token和userId建议映射关系
+            log.info("cache accessToken:{}, userId:{}", accessToken, user.getId());
+            redisManager.set(accessToken, user.getId());
 
-
-            userLoginResultDTO.setAccessToken(token);
+            userLoginResultDTO.setToken(token);
         } else {
             throw new BaseException(UserResponseEnum.PASSWORD_INVALID);
         }
@@ -111,17 +118,24 @@ public class UserServiceImpl implements UserService {
         Claims claims = JwtUtil.parseJWT(token);
         log.info("claims:{}", claims);
 
-        // TODO 用token从redis换回userId
-        UserDTO userDTO = getUser(19L);
+        String accessToken = claims.getId();
+        if(StringUtils.isNotEmpty(accessToken)) {
+            Long userId = redisManager.getLong(accessToken);
+            log.info("get from cache, from accessToken:{}, to userId:{}, ", userId, accessToken);
+            if(Objects.nonNull(userId)) {
+                UserDTO userDTO = getUser(userId);
 
-        UserLoginResultDTO userLoginResultDTO = new UserLoginResultDTO();
-        userLoginResultDTO.setAccessToken(token);
-        userLoginResultDTO.setUserName(userDTO.getUserName());
-        userLoginResultDTO.setAvatar(userDTO.getAvatar());
-        userLoginResultDTO.setNickName(userDTO.getNickName());
-        userLoginResultDTO.setRole(userDTO.getRole());
+                UserLoginResultDTO userLoginResultDTO = new UserLoginResultDTO();
+                userLoginResultDTO.setToken(token);
+                userLoginResultDTO.setUserName(userDTO.getUserName());
+                userLoginResultDTO.setAvatar(userDTO.getAvatar());
+                userLoginResultDTO.setNickName(userDTO.getNickName());
+                userLoginResultDTO.setRole(userDTO.getRole());
+                return userLoginResultDTO;
+            }
+        }
 
-        return userLoginResultDTO;
+        throw new BaseException(UserResponseEnum.LOGIN_TOKEN_INVALID);
     }
 
 
