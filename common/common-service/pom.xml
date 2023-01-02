@@ -3,33 +3,32 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
+        <artifactId>common</artifactId>
         <groupId>com.intecsec.mall.springcloud.alibaba</groupId>
-        <artifactId>springcloud-mall</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common-redis</artifactId>
+    <artifactId>common-service</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- 数据库mysql -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>common-mysql</artifactId>
+            <type>pom</type>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-json</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- 缓存redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
     </dependencies>
+
 </project>

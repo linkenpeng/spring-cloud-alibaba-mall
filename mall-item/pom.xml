@@ -38,6 +38,12 @@
             <artifactId>common-mysql</artifactId>
             <type>pom</type>
         </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>common-service</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

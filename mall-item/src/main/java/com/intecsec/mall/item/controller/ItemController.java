@@ -1,7 +1,9 @@
 package com.intecsec.mall.item.controller;
 
 import com.intecsec.mall.common.response.ApiResponse;
+import com.intecsec.mall.common.response.ApiResponsePage;
 import com.intecsec.mall.item.dto.ItemDTO;
+import com.intecsec.mall.item.dto.ItemQueryVO;
 import com.intecsec.mall.item.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +31,11 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ApiResponse<List<ItemDTO>> itemList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                   @RequestParam(value = "pageSize", required = false, defaultValue = "2") int pageSize) {
-        List<ItemDTO> itemDTOS = itemService.itemList(page, pageSize);
-        return new ApiResponse(itemDTOS);
+    public ApiResponsePage<ItemDTO> itemList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                               @RequestParam(value = "pageSize", required = false, defaultValue = "2") int pageSize,
+                                               @RequestBody(required = false) ItemQueryVO itemQueryVO) {
+        ApiResponsePage<ItemDTO> responsePage = itemService.itemPageList(page, pageSize, itemQueryVO);
+        return responsePage;
     }
 
 

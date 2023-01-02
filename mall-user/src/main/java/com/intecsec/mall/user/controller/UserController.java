@@ -8,7 +8,6 @@ import com.intecsec.mall.user.dto.UserLoginDTO;
 import com.intecsec.mall.user.dto.UserLoginResultDTO;
 import com.intecsec.mall.user.service.UserConsigneeService;
 import com.intecsec.mall.user.service.UserService;
-import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

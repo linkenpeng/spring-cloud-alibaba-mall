@@ -10,13 +10,13 @@ import javax.annotation.PostConstruct;
 import java.io.Serializable;
 
 /**
- * @description: 输出Api结果
+ * @description: 输出分页结果
  * @author: peter.peng
  * @create: 2018-11-02 11:04
  **/
 @Getter
 @Setter
-public class ApiResponse<T> implements Serializable {
+public class ApiResponsePage<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,12 @@ public class ApiResponse<T> implements Serializable {
 
     private T data;
 
-    private long totalCount;
+    /** 总数 */
+    private long total;
+    /** 分页大小 */
+    private long size;
+    /** 当前页 */
+    private long current;
 
     private String traceId;
 
@@ -39,30 +44,30 @@ public class ApiResponse<T> implements Serializable {
         }
     }
 
-    public ApiResponse() {
+    public ApiResponsePage() {
 
     }
 
-    public ApiResponse(T data) {
+    public ApiResponsePage(T data) {
         this.code = ResponseEnum.SUCCESS.getCode();
         this.message = ResponseEnum.SUCCESS.getMessage();
         this.data = data;
         this.init();
     }
 
-    public ApiResponse(T data, long totalCount) {
+    public ApiResponsePage(T data, long total) {
         this(data);
-        this.totalCount = totalCount;
+        this.total = total;
     }
 
-    public ApiResponse(int code, String message) {
+    public ApiResponsePage(int code, String message) {
         this.code = code;
         this.message = message;
         this.init();
     }
 
 
-    public ApiResponse(IResponseEnum responseEnum) {
+    public ApiResponsePage(IResponseEnum responseEnum) {
         this.code = responseEnum.getCode();
         this.message = responseEnum.getMessage();
         this.init();

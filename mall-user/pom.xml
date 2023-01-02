@@ -59,7 +59,10 @@
             <artifactId>common-redis</artifactId>
         </dependency>
 
-
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>common-service</artifactId>
+        </dependency>
 
     </dependencies>
 
