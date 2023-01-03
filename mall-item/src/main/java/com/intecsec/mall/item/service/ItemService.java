@@ -1,6 +1,6 @@
 package com.intecsec.mall.item.service;
 
-import com.intecsec.mall.common.response.ApiResponsePage;
+import com.intecsec.mall.common.response.PageData;
 import com.intecsec.mall.item.dto.ItemDTO;
 import com.intecsec.mall.item.dto.ItemQueryVO;
 
@@ -17,7 +17,7 @@ public interface ItemService {
 
     List<ItemDTO> itemList(int page, int pageSize);
 
-    ApiResponsePage<ItemDTO> itemPageList(int page, int pageSize, ItemQueryVO itemQueryVO);
+    PageData<ItemDTO> itemPageList(int page, int pageSize, ItemQueryVO itemQueryVO);
 
     List<ItemDTO> getItemListByIds(List<Long> ids);
 }

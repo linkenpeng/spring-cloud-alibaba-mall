@@ -1,7 +1,7 @@
 package com.intecsec.mall.item.controller;
 
 import com.intecsec.mall.common.response.ApiResponse;
-import com.intecsec.mall.common.response.ApiResponsePage;
+import com.intecsec.mall.common.response.PageData;
 import com.intecsec.mall.item.dto.ItemDTO;
 import com.intecsec.mall.item.dto.ItemQueryVO;
 import com.intecsec.mall.item.service.ItemService;
@@ -31,11 +31,11 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ApiResponsePage<ItemDTO> itemList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                               @RequestParam(value = "pageSize", required = false, defaultValue = "2") int pageSize,
-                                               @RequestBody(required = false) ItemQueryVO itemQueryVO) {
-        ApiResponsePage<ItemDTO> responsePage = itemService.itemPageList(page, pageSize, itemQueryVO);
-        return responsePage;
+    public ApiResponse<PageData<ItemDTO>> itemList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                                  @RequestParam(value = "pageSize", required = false, defaultValue = "2") int pageSize,
+                                                  @RequestBody(required = false) ItemQueryVO itemQueryVO) {
+        PageData<ItemDTO> pageData = itemService.itemPageList(page, pageSize, itemQueryVO);
+        return new ApiResponse(pageData);
     }
 
 

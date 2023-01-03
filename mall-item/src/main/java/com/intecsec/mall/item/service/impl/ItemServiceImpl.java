@@ -2,14 +2,14 @@ package com.intecsec.mall.item.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.intecsec.mall.common.response.ApiResponsePage;
+import com.intecsec.mall.common.response.PageData;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.common.utils.JsonUtils;
 import com.intecsec.mall.item.dto.ItemDTO;
 import com.intecsec.mall.item.dto.ItemQueryVO;
 import com.intecsec.mall.item.entity.Item;
-import com.intecsec.mall.item.service.ItemService;
 import com.intecsec.mall.item.mapper.ItemMapper;
+import com.intecsec.mall.item.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -47,7 +47,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ApiResponsePage<ItemDTO> itemPageList(int page, int pageSize, ItemQueryVO itemQueryVO) {
+    public PageData<ItemDTO> itemPageList(int page, int pageSize, ItemQueryVO itemQueryVO) {
         log.info("itemList page:{}, pageSize:{}, itemQueryVO:{}", page, pageSize, JsonUtils.toJson(itemQueryVO));
 
         QueryWrapper<Item> queryWrapper = new QueryWrapper<>();
@@ -62,12 +62,13 @@ public class ItemServiceImpl implements ItemService {
         List<Item> itemList = itemPageResult.getRecords();
         List<ItemDTO> itemDTOS = DOUtils.copyList(itemList, ItemDTO.class);
 
-        ApiResponsePage<ItemDTO> apiResponsePage = new ApiResponsePage(itemDTOS);
-        apiResponsePage.setTotal(itemPageResult.getTotal());
-        apiResponsePage.setSize(itemPageResult.getSize());
-        apiResponsePage.setCurrent(itemPageResult.getCurrent());
+        PageData<ItemDTO> pageData = new PageData<>();
+        pageData.setList(itemDTOS);
+        pageData.setTotal(itemPageResult.getTotal());
+        pageData.setSize(itemPageResult.getSize());
+        pageData.setCurrent(itemPageResult.getCurrent());
 
-        return apiResponsePage;
+        return pageData;
     }
 
 
