@@ -55,6 +55,14 @@ public class ItemServiceImpl implements ItemService {
             if(StringUtils.isNotEmpty(itemQueryVO.getItemName())) {
                 queryWrapper.eq("item_name", itemQueryVO.getItemName());
             }
+            // 大于
+            if(Objects.nonNull(itemQueryVO.getLowPrice())) {
+                queryWrapper.ge("item_price", itemQueryVO.getLowPrice());
+            }
+            // 小于
+            if(Objects.nonNull(itemQueryVO.getHighPrice())) {
+                queryWrapper.le("item_price", itemQueryVO.getHighPrice());
+            }
         }
 
         Page<Item> itemPage = new Page<>(page, pageSize);

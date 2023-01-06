@@ -30,10 +30,9 @@ public class ItemController {
         return new ApiResponse(itemDTO);
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ApiResponse<PageData<ItemDTO>> itemList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                                  @RequestParam(value = "pageSize", required = false, defaultValue = "2") int pageSize,
-                                                  @RequestBody(required = false) ItemQueryVO itemQueryVO) {
+    @RequestMapping(value = "/list/{page}/{pageSize}", method = RequestMethod.POST)
+    public ApiResponse<PageData<ItemDTO>> itemList(@PathVariable Integer page, @PathVariable Integer pageSize,
+                                                   @RequestBody ItemQueryVO itemQueryVO) {
         PageData<ItemDTO> pageData = itemService.itemPageList(page, pageSize, itemQueryVO);
         return new ApiResponse(pageData);
     }

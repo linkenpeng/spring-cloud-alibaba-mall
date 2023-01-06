@@ -1,5 +1,26 @@
 <template>
   <div class="app-container">
+
+    <el-form :inline="true" class="demo-form-inline">
+      <el-form-item label="商品名称">
+        <el-input v-model="searchObj.item_name" placeholder="商品名称"></el-input>
+      </el-form-item>
+      <el-form-item label="价格大于">
+        <el-input v-model="searchObj.low_price" placeholder="价格大于"></el-input>
+      </el-form-item>
+      <el-form-item label="价格小于">
+        <el-input v-model="searchObj.high_price" placeholder="价格小于"></el-input>
+      </el-form-item>
+      <el-form-item label="商品分类">
+        <el-select v-model="searchObj.catid" placeholder="商品分类">
+          <el-option label="水果" value="1"></el-option>
+          <el-option label="化妆品" value="2"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-button type="primary" icon="el-icon-search" @click="fetchData(current)">查询</el-button>
+    </el-form>
+
+
     <el-table
       :data="list"
       style="width: 100%">
@@ -43,7 +64,7 @@ export default {
   data() {
     return {
       current: 1,
-      size: 2,
+      size: 3,
       searchObj: {},
       list: [],
       total: 0
@@ -53,10 +74,9 @@ export default {
     this.fetchData()
   },
   methods: {
-    fetchData(page=1) {
-      this.current = page
-      getItemList(this.current, this.size, this.searchObj).then(response => {
-        console.log(response.data)
+    fetchData(nowPage=1) {
+      getItemList(nowPage, this.size, this.searchObj)
+        .then(response => {
         this.list = response.data.list
         this.total = response.data.total
       })
