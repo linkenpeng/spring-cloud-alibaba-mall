@@ -124,4 +124,17 @@ public class ItemServiceImpl implements ItemService {
     public int deleteById(Long id) {
         return itemMapper.deleteById(id);
     }
+
+    @Override
+    public int deleteByIdList(List<Long> idList) {
+        return itemMapper.deleteBatchIds(idList);
+    }
+
+    @Override
+    public int changeStatus(Long id, Integer status) {
+        Item item = itemMapper.selectById(id);
+        item.setStatus(status);
+        return itemMapper.updateById(item);
+    }
+
 }

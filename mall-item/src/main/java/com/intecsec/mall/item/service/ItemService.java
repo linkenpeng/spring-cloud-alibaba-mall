@@ -22,4 +22,8 @@ public interface ItemService {
     List<ItemDTO> getItemListByIds(List<Long> ids);
 
     int deleteById(Long id);
+
+    int deleteByIdList(List<Long> idList);
+
+    int changeStatus(Long id, Integer status);
 }

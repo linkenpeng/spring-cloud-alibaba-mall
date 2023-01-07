@@ -27,6 +27,8 @@ public class ItemDTO implements Serializable {
 
     private String itemDesc;
 
+    private Integer status;
+
     private Date gmtCreated;
 
     private Date gmtUpdate;

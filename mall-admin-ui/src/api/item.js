@@ -15,6 +15,21 @@ export default {
       url: `/item/${id}`,
       method: 'delete'
     })
+  },
+
+  deleteByIdList(idList) {
+    return request({
+      url: `/item/deleteBatch`,
+      method: 'delete',
+      data: idList
+    })
+  },
+
+  changeStatus(id, status) {
+    return request({
+      url: `/item/changeStatus/${id}/${status}`,
+      method: 'put'
+    })
   }
 
 }

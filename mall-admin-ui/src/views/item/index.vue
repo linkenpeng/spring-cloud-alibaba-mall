@@ -22,22 +22,34 @@
       <el-button type="primary" icon="el-icon-search" @click="fetchData(current)">查询</el-button>
     </el-form>
 
+    <div>
+      <el-button type="danger" size="mini" @click="removeDataByIdList()">批量删除</el-button>
+    </div>
 
-    <el-table :data="list" style="width: 100%">
+    <el-table :data="list" @selection-change="handleSelectionChange" style="width: 100%">
 
-      <el-table-column prop="item_image" label="商品图片" width="180">
+      <el-table-column type="selection" width="50"></el-table-column>
+
+      <el-table-column prop="item_image" label="商品图片" >
         <template slot-scope="scope">
           <img :src="scope.row.item_image" alt="" style="width: 100px;height: 100px">
         </template>
       </el-table-column>
 
-      <el-table-column prop="item_name" label="商品名" width="180"></el-table-column>
+      <el-table-column prop="item_name" label="商品名" ></el-table-column>
       <el-table-column prop="item_price" label="商品价格"></el-table-column>
       <el-table-column prop="item_category.name" label="商品分类"></el-table-column>
+      <el-table-column prop="status" label="上架状态">
+        <template slot-scope="scope">
+          {{scope.row.status === 1 ? "上架" : "下架"}}
+        </template>
+      </el-table-column>
 
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button type="danger" icon="el-icon-delete" circle @click="removeDataById(scope.row.id)"></el-button>
+          <el-button type="danger" icon="el-icon-delete"  @click="removeDataById(scope.row.id)">删除</el-button>
+          <el-button type="primary" v-if="scope.row.status == 0" icon="el-icon-delete"  @click="changeStatus(scope.row.id, 1)">上架</el-button>
+          <el-button type="danger" v-if="scope.row.status == 1" icon="el-icon-delete"  @click="changeStatus(scope.row.id, 0)">下架</el-button>
         </template>
       </el-table-column>
 
@@ -68,7 +80,8 @@ export default {
       size: 3,
       searchObj: {},
       list: [],
-      total: 0
+      total: 0,
+      multiSelection: []
     }
   },
   created() {
@@ -82,6 +95,7 @@ export default {
         this.total = response.data.total
       })
     },
+
     removeDataById(id) {
 
       this.$confirm('确认删除吗?', '提示', {
@@ -105,10 +119,42 @@ export default {
           message: '已取消删除'
         });
       });
+    },
 
+    removeDataByIdList() {
+      this.$confirm('确认批量删除吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        let idList = []
+        for(let i = 0; i < this.multiSelection.length; i++) {
+          let obj = this.multiSelection[i];
+          let id = obj.id;
+          idList.push(id)
+        }
+        item.deleteByIdList(idList)
+          .then(response => {
+            //提示
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+            //刷新页面
+            this.fetchData(1)
+          })
+      })
+    },
 
+    changeStatus(id, status) {
+      item.changeStatus(id, status)
+        .then(response => {
+          this.fetchData(1)
+        })
+    },
 
-
+    handleSelectionChange(selection) {
+      this.multiSelection = selection
     }
   }
 }

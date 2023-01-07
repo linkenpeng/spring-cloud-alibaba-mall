@@ -25,6 +25,8 @@ public class Item {
 
     private String itemDesc;
 
+    private Integer status;
+
     private Date gmtCreated;
 
     private Date gmtUpdate;

@@ -43,6 +43,18 @@ public class ItemController {
         return new ApiResponse(result);
     }
 
+    @DeleteMapping(value = "/deleteBatch")
+    public ApiResponse<Integer> deleteBatch(@RequestBody List<Long> idList) {
+        int result = itemService.deleteByIdList(idList);
+        return new ApiResponse(result);
+    }
+
+    @PutMapping(value = "/changeStatus/{id}/{status}")
+    public ApiResponse<Integer> changeStatus(@PathVariable Long id,
+                                             @PathVariable Integer status) {
+        int result = itemService.changeStatus(id, status);
+        return new ApiResponse(result);
+    }
 
     @RequestMapping(value = "/listByIds", method = RequestMethod.GET)
     public ApiResponse<List<ItemDTO>> itemListByIds(@RequestParam(value = "item_ids", required = false, defaultValue = "") String itemIds) {
