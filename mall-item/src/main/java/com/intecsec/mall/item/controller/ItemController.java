@@ -37,6 +37,12 @@ public class ItemController {
         return new ApiResponse(pageData);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ApiResponse<Integer> delete(@PathVariable Long id) {
+        int result = itemService.deleteById(id);
+        return new ApiResponse(result);
+    }
+
 
     @RequestMapping(value = "/listByIds", method = RequestMethod.GET)
     public ApiResponse<List<ItemDTO>> itemListByIds(@RequestParam(value = "item_ids", required = false, defaultValue = "") String itemIds) {

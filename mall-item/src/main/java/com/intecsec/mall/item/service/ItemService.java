@@ -20,4 +20,6 @@ public interface ItemService {
     PageData<ItemDTO> itemPageList(int page, int pageSize, ItemQueryVO itemQueryVO);
 
     List<ItemDTO> getItemListByIds(List<Long> ids);
+
+    int deleteById(Long id);
 }

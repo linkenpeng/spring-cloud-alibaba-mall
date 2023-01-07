@@ -42,7 +42,7 @@
         <mybatis.generator.version>1.4.0</mybatis.generator.version>
         <mybatis.springboot.starter.version>2.1.1</mybatis.springboot.starter.version>
         <mybatis.plus.starter.version>3.5.2</mybatis.plus.starter.version>
-        <commons.lang3.version>3.4</commons.lang3.version>
+        <commons.lang3.version>3.12.0</commons.lang3.version>
         <slf4j.version>1.7.25</slf4j.version>
         <gson.version>2.8.5</gson.version>
         <commons.codec.version>1.14</commons.codec.version>
@@ -51,6 +51,7 @@
         <spring.clound.alibaba.version>2021.0.1.0</spring.clound.alibaba.version>
         <swagger.version>3.0.0</swagger.version>
         <jjwt.version>0.9.1</jjwt.version>
+        <guava.version>30.1-jre</guava.version>
     </properties>
 
     <dependencyManagement>
@@ -138,6 +139,12 @@
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>${gson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
             <dependency>

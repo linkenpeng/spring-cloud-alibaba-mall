@@ -19,6 +19,8 @@ public class ItemDTO implements Serializable {
 
     private String itemName;
 
+    private Long categoryId;
+
     private Long itemPrice;
 
     private String itemImage;
@@ -30,4 +32,6 @@ public class ItemDTO implements Serializable {
     private Date gmtUpdate;
 
     private Byte deleteMark;
+
+    private ItemCategoryDTO itemCategory;
 }

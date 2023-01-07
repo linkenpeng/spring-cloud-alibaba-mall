@@ -9,21 +9,15 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@TableName("mall_item")
-public class Item {
+@TableName("mall_item_category")
+public class ItemCategory {
 
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    private String itemName;
+    private String name;
 
-    private Long categoryId;
-
-    private Long itemPrice;
-
-    private String itemImage;
-
-    private String itemDesc;
+    private Long parentId;
 
     private Date gmtCreated;
 

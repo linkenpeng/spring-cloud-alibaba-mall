@@ -15,4 +15,6 @@ public class ItemQueryVO {
     private Long lowPrice;
 
     private Long highPrice;
+
+    private Long categoryId;
 }

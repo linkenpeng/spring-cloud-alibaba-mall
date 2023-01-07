@@ -5,9 +5,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intecsec.mall.common.response.PageData;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.common.utils.JsonUtils;
+import com.intecsec.mall.item.dto.ItemCategoryDTO;
 import com.intecsec.mall.item.dto.ItemDTO;
 import com.intecsec.mall.item.dto.ItemQueryVO;
 import com.intecsec.mall.item.entity.Item;
+import com.intecsec.mall.item.entity.ItemCategory;
+import com.intecsec.mall.item.mapper.ItemCategoryMapper;
 import com.intecsec.mall.item.mapper.ItemMapper;
 import com.intecsec.mall.item.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +19,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @description:
@@ -29,6 +34,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Resource
     private ItemMapper itemMapper;
+
+    @Resource
+    private ItemCategoryMapper itemCategoryMapper;
 
     @Override
     public ItemDTO itemDetail(Long itemId) {
@@ -48,8 +56,28 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public PageData<ItemDTO> itemPageList(int page, int pageSize, ItemQueryVO itemQueryVO) {
-        log.info("itemList page:{}, pageSize:{}, itemQueryVO:{}", page, pageSize, JsonUtils.toJson(itemQueryVO));
+        log.info("itemList page:{}, pageSize:{}, itemQueryVO:{}",
+                page, pageSize, JsonUtils.toJson(itemQueryVO));
 
+        QueryWrapper<Item> queryWrapper = getQueryWrapper(itemQueryVO);
+
+        Page<Item> itemPage = new Page<>(page, pageSize);
+        Page<Item> itemPageResult = itemMapper.selectPage(itemPage, queryWrapper);
+        List<Item> itemList = itemPageResult.getRecords();
+        List<ItemDTO> itemDTOS = DOUtils.copyList(itemList, ItemDTO.class);
+
+        decItemCategory(itemDTOS);
+
+        PageData<ItemDTO> pageData = new PageData<>();
+        pageData.setList(itemDTOS);
+        pageData.setTotal(itemPageResult.getTotal());
+        pageData.setSize(itemPageResult.getSize());
+        pageData.setCurrent(itemPageResult.getCurrent());
+
+        return pageData;
+    }
+
+    private QueryWrapper<Item> getQueryWrapper(ItemQueryVO itemQueryVO) {
         QueryWrapper<Item> queryWrapper = new QueryWrapper<>();
         if(Objects.nonNull(itemQueryVO)) {
             if(StringUtils.isNotEmpty(itemQueryVO.getItemName())) {
@@ -63,20 +91,26 @@ public class ItemServiceImpl implements ItemService {
             if(Objects.nonNull(itemQueryVO.getHighPrice())) {
                 queryWrapper.le("item_price", itemQueryVO.getHighPrice());
             }
+            // 分类
+            if(Objects.nonNull(itemQueryVO.getCategoryId())) {
+                queryWrapper.eq("category_id", itemQueryVO.getCategoryId());
+            }
         }
+        return queryWrapper;
+    }
 
-        Page<Item> itemPage = new Page<>(page, pageSize);
-        Page<Item> itemPageResult = itemMapper.selectPage(itemPage, queryWrapper);
-        List<Item> itemList = itemPageResult.getRecords();
-        List<ItemDTO> itemDTOS = DOUtils.copyList(itemList, ItemDTO.class);
-
-        PageData<ItemDTO> pageData = new PageData<>();
-        pageData.setList(itemDTOS);
-        pageData.setTotal(itemPageResult.getTotal());
-        pageData.setSize(itemPageResult.getSize());
-        pageData.setCurrent(itemPageResult.getCurrent());
-
-        return pageData;
+    private void decItemCategory(List<ItemDTO> itemDTOS) {
+        if(itemDTOS != null && itemDTOS.size() > 0) {
+            List<Long> categoryIds = itemDTOS.stream().map(ItemDTO::getCategoryId)
+                    .collect(Collectors.toList());
+            List<ItemCategory> itemCategories = itemCategoryMapper.selectBatchIds(categoryIds);
+            Map<Long, ItemCategory> itemCategoryMap = itemCategories.stream()
+                    .collect(Collectors.toMap(ItemCategory::getId, v -> v));
+            for(ItemDTO itemDTO : itemDTOS) {
+                ItemCategory itemCategory = itemCategoryMap.get(itemDTO.getCategoryId());
+                itemDTO.setItemCategory(DOUtils.copy(itemCategory, ItemCategoryDTO.class));
+            }
+        }
     }
 
 
@@ -84,5 +118,10 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemDTO> getItemListByIds(List<Long> ids) {
         List<Item> itemList = itemMapper.selectBatchIds(ids);
         return DOUtils.copyList(itemList, ItemDTO.class);
+    }
+
+    @Override
+    public int deleteById(Long id) {
+        return itemMapper.deleteById(id);
     }
 }
