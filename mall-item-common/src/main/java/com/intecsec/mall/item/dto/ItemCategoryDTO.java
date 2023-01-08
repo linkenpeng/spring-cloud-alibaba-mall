@@ -3,6 +3,7 @@ package com.intecsec.mall.item.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @description:
@@ -12,9 +13,17 @@ import java.io.Serializable;
 @Data
 public class ItemCategoryDTO implements Serializable {
 
+    private static final long serialVersionUID = 3448159083093351410L;
+
     private Long id;
 
     private String name;
 
     private Long parentId;
+
+    private Date gmtCreated;
+
+    private Date gmtUpdate;
+
+    private Byte deleteMark;
 }

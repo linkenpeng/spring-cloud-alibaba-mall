@@ -11,14 +11,16 @@
       <el-form-item label="价格小于">
         <el-input v-model="searchObj.high_price" placeholder="价格小于"></el-input>
       </el-form-item>
+
       <el-form-item label="商品分类">
         <el-select v-model="searchObj.category_id" placeholder="商品分类">
           <el-option label="选择分类"></el-option>
-          <el-option label="水果" value="1"></el-option>
-          <el-option label="化妆品" value="2"></el-option>
-          <el-option label="服装" value="3"></el-option>
+          <el-option v-for="category in category_list"
+                     :label="category.name" :value="category.id">
+          </el-option>
         </el-select>
       </el-form-item>
+
       <el-button type="primary" icon="el-icon-search" @click="fetchData(current)">查询</el-button>
     </el-form>
 
@@ -50,6 +52,9 @@
           <el-button type="danger" icon="el-icon-delete"  @click="removeDataById(scope.row.id)">删除</el-button>
           <el-button type="primary" v-if="scope.row.status == 0" icon="el-icon-delete"  @click="changeStatus(scope.row.id, 1)">上架</el-button>
           <el-button type="danger" v-if="scope.row.status == 1" icon="el-icon-delete"  @click="changeStatus(scope.row.id, 0)">下架</el-button>
+          <router-link :to="'/item/edit/' + scope.row.id">
+            <el-button type="primary" icon="el-icon-edit">编辑</el-button>
+          </router-link>
         </template>
       </el-table-column>
 
@@ -81,7 +86,8 @@ export default {
       searchObj: {},
       list: [],
       total: 0,
-      multiSelection: []
+      multiSelection: [],
+      category_list: []
     }
   },
   created() {
@@ -93,7 +99,12 @@ export default {
         .then(response => {
         this.list = response.data.list
         this.total = response.data.total
-      })
+      });
+
+      item.getAllCategory().then(response => {
+        this.category_list = response.data
+      });
+
     },
 
     removeDataById(id) {

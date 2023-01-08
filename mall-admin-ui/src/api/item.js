@@ -10,6 +10,29 @@ export default {
     })
   },
 
+  saveItem(itemData) {
+    return request({
+      url: `/item/save`,
+      method: 'post',
+      data: itemData
+    })
+  },
+
+  getItemById(id) {
+    return request({
+      url: `/item/${id}`,
+      method: 'get'
+    })
+  },
+
+  updateItem(itemData) {
+    return request({
+      url: `/item/save`,
+      method: 'post',
+      data: itemData
+    })
+  },
+
   deleteById(id) {
     return request({
       url: `/item/${id}`,
@@ -29,6 +52,13 @@ export default {
     return request({
       url: `/item/changeStatus/${id}/${status}`,
       method: 'put'
+    })
+  },
+
+  getAllCategory() {
+    return request({
+      url: `/item/category/getAllCategory`,
+      method: 'get'
     })
   }
 

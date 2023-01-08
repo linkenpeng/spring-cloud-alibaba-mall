@@ -15,6 +15,10 @@ public interface ItemService {
 
     ItemDTO itemDetail(Long itemId);
 
+    int saveItem(ItemDTO itemDTO);
+
+    int updateItem(ItemDTO itemDTO);
+
     List<ItemDTO> itemList(int page, int pageSize);
 
     PageData<ItemDTO> itemPageList(int page, int pageSize, ItemQueryVO itemQueryVO);

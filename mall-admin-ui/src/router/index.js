@@ -55,7 +55,20 @@ export const constantRoutes = [
         name: '商品列表',
         component: () => import('@/views/item/index'),
         meta: { title: '商品列表', icon: 'table' }
-      }
+      },
+      {
+        path: 'add',
+        name: '添加商品',
+        component: () => import('@/views/item/add'),
+        meta: { title: '添加商品', icon: 'table' }
+      },
+      {
+        path: 'edit/:id',
+        name: '修改商品',
+        component: () => import('@/views/item/add'),
+        meta: { title: '修改商品', noCache: true },
+        hidden: true
+      },
     ]
   },
 
@@ -176,7 +189,7 @@ export const constantRoutes = [
     ]
   },
 
-  
+
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

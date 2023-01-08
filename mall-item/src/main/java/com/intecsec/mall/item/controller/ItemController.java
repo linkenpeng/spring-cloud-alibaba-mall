@@ -2,9 +2,11 @@ package com.intecsec.mall.item.controller;
 
 import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.common.response.PageData;
+import com.intecsec.mall.common.utils.JsonUtils;
 import com.intecsec.mall.item.dto.ItemDTO;
 import com.intecsec.mall.item.dto.ItemQueryVO;
 import com.intecsec.mall.item.service.ItemService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/item")
+@Slf4j
 public class ItemController {
 
     @Resource
@@ -28,6 +31,18 @@ public class ItemController {
     public ApiResponse<ItemDTO> itemDetail(@PathVariable Long itemId) {
         ItemDTO itemDTO = itemService.itemDetail(itemId);
         return new ApiResponse(itemDTO);
+    }
+
+    @PostMapping(value = "/save")
+    public ApiResponse<Integer> itemSave(@RequestBody ItemDTO itemDTO) {
+        log.info("itemDTO:{}", JsonUtils.toJson(itemDTO));
+        int result;
+        if(itemDTO.getId() != null && itemDTO.getId() > 0L) {
+            result = itemService.updateItem(itemDTO);
+        } else {
+            result = itemService.saveItem(itemDTO);
+        }
+        return new ApiResponse(result);
     }
 
     @RequestMapping(value = "/list/{page}/{pageSize}", method = RequestMethod.POST)

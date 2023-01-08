@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 07/01/2023 17:37:39
+ Date: 08/01/2023 21:19:09
 */
 
 SET NAMES utf8mb4;
@@ -28,23 +28,27 @@ CREATE TABLE `mall_item` (
   `item_price` bigint NOT NULL DEFAULT '0',
   `item_image` varchar(255) NOT NULL DEFAULT '',
   `item_desc` varchar(255) NOT NULL DEFAULT '',
+  `status` tinyint DEFAULT '0' COMMENT '上架状态 1：上架 0：下架',
   `gmt_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `gmt_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `delete_mark` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of mall_item
 -- ----------------------------
 BEGIN;
-INSERT INTO `mall_item` VALUES (1, '沐浴露', 2, 2600, 'https://img1.baidu.com/it/u=2060009719,1463033359&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', '沐浴露', '2020-04-05 16:00:00', '2020-04-05 16:00:00', 0);
-INSERT INTO `mall_item` VALUES (2, '洗发水', 2, 4300, 'https://t1.roadlady.com/uploads/allimg/2209/145T03U5-0.jpg', '洗发水', '2020-04-05 16:00:26', '2020-04-05 16:00:26', 0);
-INSERT INTO `mall_item` VALUES (3, '衣服', 3, 12800, 'https://imgservice.suning.cn/uimg1/b2c/image/RyOD34D9qxtuvtdA6uOgPg.jpg', '衣服', '2023-01-02 15:34:42', '2023-01-02 15:34:42', 0);
-INSERT INTO `mall_item` VALUES (4, '裤子', 3, 9800, 'https://bkimg.cdn.bcebos.com/pic/96dda144ad345982b2b7dd0b44a526adcbef76092e53', '裤子', '2023-01-02 15:34:46', '2023-01-02 15:34:46', 0);
-INSERT INTO `mall_item` VALUES (5, '袜子', 3, 1920, 'https://imgservice.suning.cn/uimg1/b2c/image/FttayraC3CBcaCGpYItQBQ.jpg_800w_800h_4e', '袜子', '2023-01-02 15:34:49', '2023-01-02 15:34:49', 0);
-INSERT INTO `mall_item` VALUES (6, '苹果', 1, 890, 'https://lmg.jj20.com/up/allimg/tp02/1Z91P02I21Y9-0-lp.jpg', '苹果', '2023-01-02 15:35:06', '2023-01-02 15:35:06', 0);
-INSERT INTO `mall_item` VALUES (7, '橙子', 1, 560, 'https://bpic.51yuansu.com/pic3/cover/03/27/68/5b7abefce5942_610.jpg', '橙子', '2023-01-02 15:35:19', '2023-01-02 15:35:19', 0);
+INSERT INTO `mall_item` VALUES (1, '沐浴露', 2, 2600, 'https://img1.baidu.com/it/u=2060009719,1463033359&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', '沐浴露', 1, '2020-04-05 16:00:00', '2020-04-05 16:00:00', 0);
+INSERT INTO `mall_item` VALUES (2, '洗发水', 2, 4300, 'https://t1.roadlady.com/uploads/allimg/2209/145T03U5-0.jpg', '洗发水', 1, '2020-04-05 16:00:26', '2020-04-05 16:00:26', 0);
+INSERT INTO `mall_item` VALUES (3, '衣服', 3, 12800, 'https://imgservice.suning.cn/uimg1/b2c/image/RyOD34D9qxtuvtdA6uOgPg.jpg', '衣服', 0, '2023-01-02 15:34:42', '2023-01-02 15:34:42', 0);
+INSERT INTO `mall_item` VALUES (4, '裤子', 3, 9800, 'https://bkimg.cdn.bcebos.com/pic/96dda144ad345982b2b7dd0b44a526adcbef76092e53', '裤子', 0, '2023-01-02 15:34:46', '2023-01-02 15:34:46', 0);
+INSERT INTO `mall_item` VALUES (5, '袜子', 3, 1920, 'https://imgservice.suning.cn/uimg1/b2c/image/FttayraC3CBcaCGpYItQBQ.jpg_800w_800h_4e', '袜子', 1, '2023-01-02 15:34:49', '2023-01-02 15:34:49', 0);
+INSERT INTO `mall_item` VALUES (6, '苹果', 1, 890, 'https://lmg.jj20.com/up/allimg/tp02/1Z91P02I21Y9-0-lp.jpg', '苹果', 0, '2023-01-02 15:35:06', '2023-01-02 15:35:06', 0);
+INSERT INTO `mall_item` VALUES (7, '橙子', 1, 560, 'https://bpic.51yuansu.com/pic3/cover/03/27/68/5b7abefce5942_610.jpg', '橙子', 0, '2023-01-02 15:35:19', '2023-01-02 15:35:19', 0);
+INSERT INTO `mall_item` VALUES (8, '桃子', 1, 12500, '', '桃子', 0, '2023-01-08 20:13:57', '2023-01-08 20:13:57', 0);
+INSERT INTO `mall_item` VALUES (9, '1', 1, 1, '', '1', 1, '2023-01-08 20:30:42', '2023-01-08 20:30:42', 0);
+INSERT INTO `mall_item` VALUES (10, '22', 2, 22, '', '22', 1, '2023-01-08 20:34:54', '2023-01-08 20:34:54', 0);
 COMMIT;
 
 -- ----------------------------

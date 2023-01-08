@@ -44,6 +44,21 @@ public class ItemServiceImpl implements ItemService {
         return DOUtils.copy(item, ItemDTO.class);
     }
 
+
+    @Override
+    public int saveItem(ItemDTO itemDTO) {
+        Item item = DOUtils.copy(itemDTO, Item.class);
+        int insert = itemMapper.insert(item);
+        return insert;
+    }
+
+    @Override
+    public int updateItem(ItemDTO itemDTO) {
+        Item item = DOUtils.copy(itemDTO, Item.class);
+        int update = itemMapper.updateById(item);
+        return update;
+    }
+
     @Override
     public List<ItemDTO> itemList(int page, int pageSize) {
         log.info("itemList page:{}, pageSize:{}", page, pageSize);
