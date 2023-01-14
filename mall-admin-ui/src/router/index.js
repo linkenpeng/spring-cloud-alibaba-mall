@@ -69,6 +69,20 @@ export const constantRoutes = [
         meta: { title: '修改商品', noCache: true },
         hidden: true
       },
+      {
+        path: 'sku/add/:id',
+        name: '添加SKU',
+        component: () => import('@/views/item/add_sku'),
+        meta: { title: '添加SKU', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'sku/list/:id',
+        name: 'SKU列表',
+        component: () => import('@/views/item/index_sku'),
+        meta: { title: 'SKU列表', noCache: true },
+        hidden: true
+      },
     ]
   },
 

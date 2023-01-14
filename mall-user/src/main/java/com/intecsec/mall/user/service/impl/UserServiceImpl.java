@@ -145,7 +145,7 @@ public class UserServiceImpl implements UserService {
 
         User user = DOUtils.copy(userDTO, User.class);
         user.setId(userId);
-        user.setGmtUpdate(new Date());
+        user.setGmtUpdated(new Date());
 
         UserConsignee userConsignee = new UserConsignee();
         userConsignee.setUserId(userId);

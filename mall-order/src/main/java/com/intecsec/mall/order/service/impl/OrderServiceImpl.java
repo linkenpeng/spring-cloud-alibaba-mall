@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.item.dto.ItemDTO;
+import com.intecsec.mall.item.dto.ItemSkuDTO;
 import com.intecsec.mall.order.client.ItemClient;
 import com.intecsec.mall.order.client.UserClient;
 import com.intecsec.mall.order.constant.OrderStatusEnum;
@@ -65,25 +66,26 @@ public class OrderServiceImpl implements OrderService {
         orderDTO.setUserId(addOrderDTO.getUser_id());
 
         List<Long> itemIds = new ArrayList<>();
-        Map<Long, Integer> itemNumberMap = new HashMap<>();
+        Map<Long, Integer> itemSkuNumberMap = new HashMap<>();
         for(AddOrderItemDTO addOrderItemDTO : addOrderDTO.getOrder_item_list()) {
-            itemIds.add(addOrderItemDTO.getItem_id());
-            itemNumberMap.put(addOrderItemDTO.getItem_id(), addOrderItemDTO.getNumber());
+            itemIds.add(addOrderItemDTO.getSku_id());
+            itemSkuNumberMap.put(addOrderItemDTO.getSku_id(), addOrderItemDTO.getNumber());
         }
 
-        ApiResponse<List<ItemDTO>> itemResponse = itemClient.itemListByIds(StringUtils.join(itemIds, ","));
-        List<ItemDTO> itemDTOS = itemResponse.getData();
+        ApiResponse<List<ItemSkuDTO>> itemResponse = itemClient.skuListByIds(StringUtils.join(itemIds, ","));
+        List<ItemSkuDTO> itemSkuDTOS = itemResponse.getData();
 
         List<OrderItemDTO> orderItemDTOS = new ArrayList<>();
         long orderPriceAmount = 0L;
-        for(ItemDTO itemDTO : itemDTOS) {
+        for(ItemSkuDTO itemSkuDTO : itemSkuDTOS) {
             OrderItemDTO orderItemDTO = new OrderItemDTO();
-            orderItemDTO.setItemId(itemDTO.getId());
-            orderItemDTO.setItemNum(itemNumberMap.get(itemDTO.getId()));
-            orderItemDTO.setItemPrice(itemDTO.getItemPrice());
-            orderItemDTO.setItemName(itemDTO.getItemName());
+            orderItemDTO.setSkuId(itemSkuDTO.getId());
+            orderItemDTO.setItemId(itemSkuDTO.getItemId());
+            orderItemDTO.setSkuNum(itemSkuNumberMap.get(itemSkuDTO.getId()));
+            orderItemDTO.setSkuPrice(itemSkuDTO.getSkuPrice());
+            orderItemDTO.setSkuName(itemSkuDTO.getSkuName());
 
-            orderPriceAmount += itemDTO.getItemPrice();
+            orderPriceAmount += itemSkuDTO.getSkuPrice();
 
             orderItemDTOS.add(orderItemDTO);
         }

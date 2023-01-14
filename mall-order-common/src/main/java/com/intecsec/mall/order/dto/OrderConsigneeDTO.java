@@ -30,7 +30,7 @@ public class OrderConsigneeDTO implements Serializable {
 
     private Date gmtCreated;
 
-    private Date gmtUpdate;
+    private Date gmtUpdated;
 
     private Byte deleteMark;
 }

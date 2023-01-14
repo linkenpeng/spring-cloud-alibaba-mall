@@ -19,13 +19,15 @@ public class OrderItemDTO implements Serializable {
 
     private Long orderId;
 
+    private Long skuId;
+
     private Long itemId;
 
-    private Long itemPrice;
+    private Long skuPrice;
 
-    private Integer itemNum;
+    private Integer skuNum;
 
-    private String itemName;
+    private String skuName;
 
     private Long actualPrice;
 
@@ -37,7 +39,7 @@ public class OrderItemDTO implements Serializable {
 
     private Date gmtCreated;
 
-    private Date gmtUpdate;
+    private Date gmtUpdated;
 
     private Byte deleteMark;
 

@@ -1,36 +1,34 @@
-package com.intecsec.mall.user.entity;
+package com.intecsec.mall.item.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-@TableName("mall_user_consignee")
-public class UserConsignee {
+@TableName("mall_item_sku")
+public class ItemSku {
 
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    private Long userId;
+    private String skuName;
 
-    private String province;
+    private Long itemId;
 
-    private String city;
+    private Long skuPrice;
 
-    private String area;
+    private String skuImage;
 
-    private String address;
-
-    private String consigneeName;
-
-    private String mobile;
+    private Integer status;
 
     private Date gmtCreated;
 
     private Date gmtUpdated;
 
+    @TableLogic
     private Byte deleteMark;
 }

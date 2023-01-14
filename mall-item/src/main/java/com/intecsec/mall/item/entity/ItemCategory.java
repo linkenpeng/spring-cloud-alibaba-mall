@@ -21,7 +21,7 @@ public class ItemCategory {
 
     private Date gmtCreated;
 
-    private Date gmtUpdate;
+    private Date gmtUpdated;
 
     @TableLogic
     private Byte deleteMark;

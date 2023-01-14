@@ -23,7 +23,7 @@ public class ItemCategoryDTO implements Serializable {
 
     private Date gmtCreated;
 
-    private Date gmtUpdate;
+    private Date gmtUpdated;
 
     private Byte deleteMark;
 }

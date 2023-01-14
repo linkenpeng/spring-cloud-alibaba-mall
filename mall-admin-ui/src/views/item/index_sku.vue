@@ -55,12 +55,6 @@
           <router-link :to="'/item/edit/' + scope.row.id">
             <el-button type="primary" icon="el-icon-edit">编辑</el-button>
           </router-link>
-          <router-link :to="'/item/sku/add' + scope.row.id">
-            <el-button type="primary" icon="el-icon-add">添加SKU</el-button>
-          </router-link>
-          <router-link :to="'/item/sku/list' + scope.row.id">
-            <el-button type="primary">查看SKU列表</el-button>
-          </router-link>
         </template>
       </el-table-column>
 

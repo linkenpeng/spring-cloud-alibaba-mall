@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 public class AddOrderItemDTO implements Serializable {
 
-    private Long item_id;
+    private Long sku_id;
 
     private Integer number;
     

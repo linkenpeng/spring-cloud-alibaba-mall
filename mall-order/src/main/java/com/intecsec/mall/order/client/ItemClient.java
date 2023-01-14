@@ -2,6 +2,7 @@ package com.intecsec.mall.order.client;
 
 import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.item.dto.ItemDTO;
+import com.intecsec.mall.item.dto.ItemSkuDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,4 +21,7 @@ public interface ItemClient {
 
     @RequestMapping(value = "/item/listByIds", method = RequestMethod.GET)
     ApiResponse<List<ItemDTO>> itemListByIds(@RequestParam(value = "item_ids", required = false, defaultValue = "") String itemIds);
+
+    @RequestMapping(value = "/item/sku/listByIds", method = RequestMethod.GET)
+    ApiResponse<List<ItemSkuDTO>> skuListByIds(@RequestParam(value = "sku_ids", required = false, defaultValue = "") String skuIds);
 }

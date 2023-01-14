@@ -3,6 +3,7 @@ package com.intecsec.mall.item.controller;
 import com.intecsec.mall.common.response.ApiResponse;
 import com.intecsec.mall.common.response.PageData;
 import com.intecsec.mall.common.utils.JsonUtils;
+import com.intecsec.mall.common.utils.ListUtils;
 import com.intecsec.mall.item.dto.ItemDTO;
 import com.intecsec.mall.item.dto.ItemQueryVO;
 import com.intecsec.mall.item.service.ItemService;
@@ -73,14 +74,7 @@ public class ItemController {
 
     @RequestMapping(value = "/listByIds", method = RequestMethod.GET)
     public ApiResponse<List<ItemDTO>> itemListByIds(@RequestParam(value = "item_ids", required = false, defaultValue = "") String itemIds) {
-        List<Long> ids = new ArrayList<>();
-        if(StringUtils.isNotEmpty(itemIds)) {
-            String idSplit[] = StringUtils.split(itemIds, ",");
-            for(String id : idSplit) {
-                ids.add(Long.parseLong(id));
-            }
-        }
-
+        List<Long> ids = ListUtils.idsToList(itemIds);
         List<ItemDTO> itemDTOList = itemService.getItemListByIds(ids);
         return new ApiResponse(itemDTOList);
     }

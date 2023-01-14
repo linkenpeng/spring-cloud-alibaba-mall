@@ -42,7 +42,7 @@ public class Order {
 
     private Date gmtCreated;
 
-    private Date gmtUpdate;
+    private Date gmtUpdated;
 
     @TableLogic
     private Byte deleteMark;

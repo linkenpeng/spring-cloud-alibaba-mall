@@ -34,7 +34,7 @@ public class User {
     private Date gmtCreated;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date gmtUpdate;
+    private Date gmtUpdated;
 
     @TableLogic
     @TableField(fill = FieldFill.INSERT)

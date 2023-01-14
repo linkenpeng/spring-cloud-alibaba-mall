@@ -14,6 +14,17 @@
         </el-select>
       </el-form-item>
 
+      <el-form-item label="商品价格">
+        <el-input v-model="itemData.item_price"></el-input>
+      </el-form-item>
+
+      <el-form-item label="是否上架">
+        <el-switch v-model="itemData.status"
+          active-color="#13ce66" inactive-color="#ff4949"
+          :active-value="1" :inactive-value="0">
+        </el-switch>
+      </el-form-item>
+
       <el-form-item label="商品描述">
         <el-input type="textarea" v-model="itemData.item_desc"></el-input>
       </el-form-item>

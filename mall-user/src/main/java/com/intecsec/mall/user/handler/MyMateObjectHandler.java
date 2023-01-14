@@ -19,11 +19,11 @@ public class MyMateObjectHandler implements MetaObjectHandler {
         this.setFieldValByName("version", 1, metaObject);
         this.setFieldValByName("deleteMark", 0, metaObject);
         this.setFieldValByName("gmtCreated", new Date(), metaObject);
-        this.setFieldValByName("gmtUpdate", new Date(), metaObject);
+        this.setFieldValByName("gmtUpdated", new Date(), metaObject);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.setFieldValByName("gmtUpdate", new Date(), metaObject);
+        this.setFieldValByName("gmtUpdated", new Date(), metaObject);
     }
 }
