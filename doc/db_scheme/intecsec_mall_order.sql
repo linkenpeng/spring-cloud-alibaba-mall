@@ -1,27 +1,11 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : localhost
- Source Server Type    : MySQL
- Source Server Version : 80019
- Source Host           : localhost:3306
- Source Schema         : intecsec_mall
-
- Target Server Type    : MySQL
- Target Server Version : 80019
- File Encoding         : 65001
-
- Date: 15/01/2023 11:08:53
-*/
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for mall_order
+-- Table structure for order
 -- ----------------------------
-DROP TABLE IF EXISTS `mall_order`;
-CREATE TABLE `mall_order` (
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `order_sn` varchar(64) NOT NULL DEFAULT '',
   `user_id` bigint NOT NULL,
@@ -39,16 +23,16 @@ CREATE TABLE `mall_order` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
--- Records of mall_order
+-- Records of order
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for mall_order_consignee
+-- Table structure for order_consignee
 -- ----------------------------
-DROP TABLE IF EXISTS `mall_order_consignee`;
-CREATE TABLE `mall_order_consignee` (
+DROP TABLE IF EXISTS `order_consignee`;
+CREATE TABLE `order_consignee` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `order_id` bigint NOT NULL DEFAULT '0',
   `user_id` bigint NOT NULL DEFAULT '0',
@@ -65,16 +49,16 @@ CREATE TABLE `mall_order_consignee` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
--- Records of mall_order_consignee
+-- Records of order_consignee
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for mall_order_item
+-- Table structure for order_item
 -- ----------------------------
-DROP TABLE IF EXISTS `mall_order_item`;
-CREATE TABLE `mall_order_item` (
+DROP TABLE IF EXISTS `order_item`;
+CREATE TABLE `order_item` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `order_id` bigint NOT NULL DEFAULT '0' COMMENT '订单id',
   `sku_id` bigint unsigned NOT NULL DEFAULT '0' COMMENT '商品skuid',
@@ -93,7 +77,7 @@ CREATE TABLE `mall_order_item` (
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
--- Records of mall_order_item
+-- Records of order_item
 -- ----------------------------
 BEGIN;
 COMMIT;

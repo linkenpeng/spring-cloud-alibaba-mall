@@ -1,5 +1,6 @@
 package com.intecsec.mall.item.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.item.dto.ItemSkuDTO;
 import com.intecsec.mall.item.entity.ItemSku;
@@ -24,6 +25,14 @@ public class ItemSkuServiceImpl implements ItemSkuService {
     @Override
     public List<ItemSkuDTO> getSkuListByIds(List<Long> ids) {
         List<ItemSku> itemSkus = itemSkuMapper.selectBatchIds(ids);
+        return DOUtils.copyList(itemSkus, ItemSkuDTO.class);
+    }
+
+    @Override
+    public List<ItemSkuDTO> getSkuListByItemId(Long itemId) {
+        QueryWrapper<ItemSku> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("item_id", itemId);
+        List<ItemSku> itemSkus = itemSkuMapper.selectList(queryWrapper);
         return DOUtils.copyList(itemSkus, ItemSkuDTO.class);
     }
 

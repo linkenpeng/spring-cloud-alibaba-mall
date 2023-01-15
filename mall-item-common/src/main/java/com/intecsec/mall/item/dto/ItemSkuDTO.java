@@ -23,6 +23,8 @@ public class ItemSkuDTO implements Serializable {
 
     private Long skuPrice;
 
+    private Long skuStock;
+
     private String skuImage;
 
     private Integer status;

@@ -24,10 +24,17 @@ public class ItemSkuController {
     @Resource
     private ItemSkuService itemSkuService;
 
-    @RequestMapping(value = "/listByIds", method = RequestMethod.GET)
-    public ApiResponse<List<ItemSkuDTO>> skuListByIds(@RequestParam(value = "sku_ids", required = false, defaultValue = "") String skuIds) {
+    @GetMapping(value = "/listByIds")
+    public ApiResponse<List<ItemSkuDTO>> skuListByIds(@RequestParam(value = "sku_ids",
+            required = false, defaultValue = "") String skuIds) {
         List<Long> ids = ListUtils.idsToList(skuIds);
         List<ItemSkuDTO> itemSkuDTOS = itemSkuService.getSkuListByIds(ids);
+        return new ApiResponse(itemSkuDTOS);
+    }
+
+    @GetMapping(value = "/listByItemId/{itemId}")
+    public ApiResponse<List<ItemSkuDTO>> skuListByItemId(@PathVariable Long itemId) {
+        List<ItemSkuDTO> itemSkuDTOS = itemSkuService.getSkuListByItemId(itemId);
         return new ApiResponse(itemSkuDTOS);
     }
 

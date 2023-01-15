@@ -10,6 +10,13 @@ export default {
     })
   },
 
+  getSkuList(itemId) {
+    return request({
+      url: `/item/sku/listByItemId/${itemId}`,
+      method: 'get',
+    })
+  },
+
   saveItem(itemData) {
     return request({
       url: `/item/save`,
@@ -63,6 +70,13 @@ export default {
     })
   },
 
+  deleteSkuById(id) {
+    return request({
+      url: `/item/sku/${id}`,
+      method: 'delete'
+    })
+  },
+
   deleteByIdList(idList) {
     return request({
       url: `/item/deleteBatch`,
@@ -74,6 +88,13 @@ export default {
   changeStatus(id, status) {
     return request({
       url: `/item/changeStatus/${id}/${status}`,
+      method: 'put'
+    })
+  },
+
+  changeSkuStatus(id, status) {
+    return request({
+      url: `/item/sku/changeStatus/${id}/${status}`,
       method: 'put'
     })
   },

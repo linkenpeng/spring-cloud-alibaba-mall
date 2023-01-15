@@ -13,6 +13,8 @@ public interface ItemSkuService {
 
     List<ItemSkuDTO> getSkuListByIds(List<Long> ids);
 
+    List<ItemSkuDTO> getSkuListByItemId(Long itemId);
+
     ItemSkuDTO getSkuById(Long id);
 
     int addSku(ItemSkuDTO itemSkuDTO);

@@ -1,4 +1,4 @@
-package com.intecsec.mall.user.handler;
+package com.intecsec.mall.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
@@ -16,7 +16,6 @@ public class MyMateObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.setFieldValByName("version", 1, metaObject);
         this.setFieldValByName("deleteMark", 0, metaObject);
         this.setFieldValByName("gmtCreated", new Date(), metaObject);
         this.setFieldValByName("gmtUpdated", new Date(), metaObject);
