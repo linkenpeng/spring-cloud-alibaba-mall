@@ -22,9 +22,38 @@ public class ItemSkuServiceImpl implements ItemSkuService {
     private ItemSkuMapper itemSkuMapper;
 
     @Override
-    public List<ItemSkuDTO> getItemListByIds(List<Long> ids) {
+    public List<ItemSkuDTO> getSkuListByIds(List<Long> ids) {
         List<ItemSku> itemSkus = itemSkuMapper.selectBatchIds(ids);
         return DOUtils.copyList(itemSkus, ItemSkuDTO.class);
     }
 
+    @Override
+    public ItemSkuDTO getSkuById(Long id) {
+        ItemSku itemSku = itemSkuMapper.selectById(id);
+        return DOUtils.copy(itemSku, ItemSkuDTO.class);
+    }
+
+    @Override
+    public int addSku(ItemSkuDTO itemSkuDTO) {
+        ItemSku itemSku = DOUtils.copy(itemSkuDTO, ItemSku.class);
+        return itemSkuMapper.insert(itemSku);
+    }
+
+    @Override
+    public int deleteById(Long id) {
+        return itemSkuMapper.deleteById(id);
+    }
+
+    @Override
+    public int updateSku(ItemSkuDTO itemSkuDTO) {
+        ItemSku itemSku = DOUtils.copy(itemSkuDTO, ItemSku.class);
+        return itemSkuMapper.updateById(itemSku);
+    }
+
+    @Override
+    public int changeStatus(Long id, Integer status) {
+        ItemSku itemSku = itemSkuMapper.selectById(id);
+        itemSku.setStatus(status);
+        return itemSkuMapper.updateById(itemSku);
+    }
 }

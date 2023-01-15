@@ -18,9 +18,24 @@ export default {
     })
   },
 
+  saveSku(skuData) {
+    return request({
+      url: `/item/sku/save`,
+      method: 'post',
+      data: skuData
+    })
+  },
+
   getItemById(id) {
     return request({
       url: `/item/${id}`,
+      method: 'get'
+    })
+  },
+
+  getSkuById(id) {
+    return request({
+      url: `/item/sku/${id}`,
       method: 'get'
     })
   },
@@ -30,6 +45,14 @@ export default {
       url: `/item/save`,
       method: 'post',
       data: itemData
+    })
+  },
+
+  updateSku(skuData) {
+    return request({
+      url: `/item/sku/save`,
+      method: 'post',
+      data: skuData
     })
   },
 

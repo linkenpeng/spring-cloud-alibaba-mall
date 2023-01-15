@@ -9,7 +9,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@TableName("mall_item_category")
+@TableName("item_category")
 public class ItemCategory {
 
     @TableId(type = IdType.AUTO)

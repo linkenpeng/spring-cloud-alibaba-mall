@@ -11,5 +11,15 @@ import java.util.List;
  **/
 public interface ItemSkuService {
 
-    List<ItemSkuDTO> getItemListByIds(List<Long> ids);
+    List<ItemSkuDTO> getSkuListByIds(List<Long> ids);
+
+    ItemSkuDTO getSkuById(Long id);
+
+    int addSku(ItemSkuDTO itemSkuDTO);
+
+    int deleteById(Long id);
+
+    int updateSku(ItemSkuDTO itemSkuDTO);
+
+    int changeStatus(Long id, Integer status);
 }

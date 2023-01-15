@@ -9,7 +9,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@TableName("mall_order_consignee")
+@TableName("order_consignee")
 public class OrderConsignee {
 
     @TableId(type = IdType.AUTO)
