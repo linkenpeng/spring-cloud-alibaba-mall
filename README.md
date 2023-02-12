@@ -23,6 +23,7 @@ gateway | 2000 |
 user | 2100 |
 item | 2200 | 
 order | 2300 | 
+public | 2400 | 
 
 # schedule
 ## Done

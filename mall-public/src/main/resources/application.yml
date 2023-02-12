@@ -1,0 +1,72 @@
+server:
+  port: 2400
+
+spring:
+  application:
+    name: public-service
+  profiles:
+    active: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 600000
+      max-lifetime: 900000
+      connection-timeout: 3000
+      connection-test-query: /* ping */ SELECT 1
+  zipkin:
+    base-url: http://zipkin.server:30774/
+  sleuth:
+    sampler:
+      percentage: 1.0
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    #  LOWER_CAMEL_CASE userName 默认策略 KEBAB_CASE user-name
+    # LOWER_CASE username SNAKE_CASE user_name UPPER_CAMEL_CASE UserName
+    property-naming-strategy: SNAKE_CASE
+  #mvc:
+  #  pathmatch:
+  #    matching-strategy: ant_path_matcher
+
+# Log
+logging:
+  file:
+    path: logs/intecsec/springcloud/alibaba/${spring.application.name}
+  level:
+    org:
+      springframework: INFO
+    com:
+      intecsec: DEBUG
+
+
+# security actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+    enabled-by-default: true
+    sensitive: false
+    enabled: true
+    configprops:
+      enabled: true
+    beans:
+      enabled: true
+    shutdown:
+      enabled: true
+
+# feign
+feign:
+  sentinel:
+    enabled: true
+
+# mybatis-plus
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0

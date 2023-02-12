@@ -17,6 +17,8 @@
         <module>mall-item-common</module>
         <module>mall-order</module>
         <module>mall-order-common</module>
+        <module>mall-public</module>
+        <module>mall-public-common</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -87,6 +89,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>mall-order-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>mall-public-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

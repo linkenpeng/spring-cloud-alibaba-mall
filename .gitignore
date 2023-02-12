@@ -13,4 +13,4 @@ logs/
 mvnw
 mvnw.cmd
 
-mall-admin-ui/node_modules
+ui-admin/node_modules
