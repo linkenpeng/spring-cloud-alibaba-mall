@@ -57,6 +57,10 @@ spring:
                 key-resolver: "#{@ipKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 1
+        - id: dict
+          uri: lb://dict-service:2400
+          predicates:
+            - Path=/dict/**
 #  zipkin:
 #    base-url: http://zipkin.server:30774/
 #  sleuth:

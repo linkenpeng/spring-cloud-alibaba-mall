@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: public-service
+    name: dict-service
   profiles:
     active: local
   datasource:

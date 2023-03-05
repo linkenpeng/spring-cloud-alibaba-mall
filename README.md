@@ -13,7 +13,7 @@ be sure you have run the redis.
 be sure you have installed the nacos.
 and then run the nacos, open the browser, enter http://localhost:8848/nacos/ to see the nacos is running.
 
-### step4 run item, user, order, gateway
+### step4 run item, user, order, dict, gateway
 open the browser, enter http://localhost:2000/order/list to see if the application is normal.
 
 ### Application Port
@@ -23,7 +23,7 @@ gateway | 2000 |
 user | 2100 |
 item | 2200 | 
 order | 2300 | 
-public | 2400 | 
+dict | 2400 | 
 
 # schedule
 ## Done

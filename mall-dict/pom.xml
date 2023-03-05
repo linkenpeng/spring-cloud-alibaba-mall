@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mall-public</artifactId>
+    <artifactId>mall-dict</artifactId>
 
     <dependencies>
         <dependency>
@@ -34,7 +34,7 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mall-public-common</artifactId>
+            <artifactId>mall-dict-common</artifactId>
         </dependency>
 
         <!-- 数据库mysql -->
