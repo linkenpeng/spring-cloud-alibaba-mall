@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @description:
@@ -24,14 +25,20 @@ public class DictController {
     @Resource
     private DictService dictService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ApiResponse<DictDTO> itemDetail(@PathVariable Long id) {
+    @GetMapping(value = "/{id}")
+    public ApiResponse<DictDTO> getById(@PathVariable Long id) {
         DictDTO dictDTO = dictService.get(id);
         return new ApiResponse(dictDTO);
     }
 
-    @RequestMapping(value = "/list/{page}/{pageSize}", method = RequestMethod.POST)
-    public ApiResponse<PageData<DictDTO>> itemList(@PathVariable Integer page,
+    @GetMapping(value = "/getChildData/{id}")
+    public ApiResponse<List<DictDTO>> getChildData(@PathVariable Long id) {
+        List<DictDTO> dictDTOList = dictService.getChildData(id);
+        return new ApiResponse(dictDTOList);
+    }
+
+    @PostMapping(value = "/list/{page}/{pageSize}")
+    public ApiResponse<PageData<DictDTO>> getPageList(@PathVariable Integer page,
                                                    @PathVariable Integer pageSize,
                                                    @RequestBody(required = false) DictQueryVO queryVO) {
         PageData<DictDTO> pageData = dictService.pageList(page, pageSize, queryVO);
@@ -39,7 +46,7 @@ public class DictController {
     }
 
     @PostMapping(value = "/save")
-    public ApiResponse<Integer> itemSave(@RequestBody DictDTO dictDTO) {
+    public ApiResponse<Integer> save(@RequestBody DictDTO dictDTO) {
         log.info("dictDTO:{}", JsonUtils.toJson(dictDTO));
         int result;
         if(dictDTO.getId() != null && dictDTO.getId() > 0L) {

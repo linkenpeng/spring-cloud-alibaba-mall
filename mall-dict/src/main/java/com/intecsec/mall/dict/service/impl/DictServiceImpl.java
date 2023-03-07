@@ -54,6 +54,30 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
+    public List<DictDTO> getChildData(long id) {
+        QueryWrapper<Dict> queryWrapper = getChildWrapper(id);
+        List<Dict> list = dictMapper.selectList(queryWrapper);
+        // 非常慢 需要修改
+        for(Dict dict : list) {
+            boolean isChild = this.isChild(dict.getId());
+            dict.setHasChildren(isChild);
+        }
+        return DOUtils.copyList(list, DictDTO.class);
+    }
+
+    private QueryWrapper<Dict> getChildWrapper(long id) {
+        QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("parent_id", id);
+        return queryWrapper;
+    }
+
+    private boolean isChild(long id) {
+        QueryWrapper<Dict> queryWrapper = getChildWrapper(id);
+        Long count = dictMapper.selectCount(queryWrapper);
+        return count > 0;
+    }
+
+    @Override
     public PageData<DictDTO> pageList(int page, int pageSize, DictQueryVO dictQueryVO) {
         QueryWrapper<Dict> queryWrapper = getQueryWrapper(dictQueryVO);
 

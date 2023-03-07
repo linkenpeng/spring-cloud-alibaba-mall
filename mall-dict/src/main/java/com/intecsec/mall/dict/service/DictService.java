@@ -4,6 +4,8 @@ import com.intecsec.mall.common.response.PageData;
 import com.intecsec.mall.dict.dto.DictDTO;
 import com.intecsec.mall.dict.dto.DictQueryVO;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: peter.peng
@@ -18,6 +20,8 @@ public interface DictService {
     int delete(long id);
 
     DictDTO get(long id);
+
+    List<DictDTO> getChildData(long id);
 
     PageData<DictDTO> pageList(int page, int pageSize, DictQueryVO dictQueryVO);
 
