@@ -17,6 +17,8 @@ public interface DictService {
 
     int update(DictDTO dictDTO);
 
+    int updateHasChildren(long id);
+
     int delete(long id);
 
     DictDTO get(long id);

@@ -32,6 +32,7 @@ public class DictServiceImpl implements DictService {
     public int add(DictDTO dictDTO) {
         Dict dict = DOUtils.copy(dictDTO, Dict.class);
         int result = dictMapper.insert(dict);
+        updateHasChildren(dict.getId());
         return result;
     }
 
@@ -39,12 +40,15 @@ public class DictServiceImpl implements DictService {
     public int update(DictDTO dictDTO) {
         Dict dict = DOUtils.copy(dictDTO, Dict.class);
         int result = dictMapper.updateById(dict);
+        updateHasChildren(dict.getId());
         return result;
     }
 
     @Override
     public int delete(long id) {
-        return dictMapper.deleteById(id);
+        int result = dictMapper.deleteById(id);
+        updateHasChildren(id);
+        return result;
     }
 
     @Override
@@ -57,11 +61,6 @@ public class DictServiceImpl implements DictService {
     public List<DictDTO> getChildData(long id) {
         QueryWrapper<Dict> queryWrapper = getChildWrapper(id);
         List<Dict> list = dictMapper.selectList(queryWrapper);
-        // 非常慢 需要修改
-        for(Dict dict : list) {
-            boolean isChild = this.isChild(dict.getId());
-            dict.setHasChildren(isChild);
-        }
         return DOUtils.copyList(list, DictDTO.class);
     }
 
@@ -71,10 +70,16 @@ public class DictServiceImpl implements DictService {
         return queryWrapper;
     }
 
-    private boolean isChild(long id) {
+    public int updateHasChildren(long id) {
         QueryWrapper<Dict> queryWrapper = getChildWrapper(id);
         Long count = dictMapper.selectCount(queryWrapper);
-        return count > 0;
+        Dict dict = dictMapper.selectById(id);
+        if(count > 0) {
+            dict.setHasChildren(1);
+        } else {
+            dict.setHasChildren(0);
+        }
+        return dictMapper.updateById(dict);
     }
 
     @Override
