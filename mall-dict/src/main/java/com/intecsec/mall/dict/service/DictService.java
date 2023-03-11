@@ -25,6 +25,8 @@ public interface DictService {
 
     List<DictDTO> getChildData(long id);
 
+    List<DictDTO> getRootData();
+
     PageData<DictDTO> pageList(int page, int pageSize, DictQueryVO dictQueryVO);
 
 }

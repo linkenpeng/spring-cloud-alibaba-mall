@@ -70,14 +70,22 @@ public class DictServiceImpl implements DictService {
         return queryWrapper;
     }
 
+    @Override
+    public List<DictDTO> getRootData() {
+        QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("parent_id", 0);
+        List<Dict> list = dictMapper.selectList(queryWrapper);
+        return DOUtils.copyList(list, DictDTO.class);
+    }
+
     public int updateHasChildren(long id) {
         QueryWrapper<Dict> queryWrapper = getChildWrapper(id);
         Long count = dictMapper.selectCount(queryWrapper);
         Dict dict = dictMapper.selectById(id);
         if(count > 0) {
-            dict.setHasChildren(1);
+            dict.setHasChildren(true);
         } else {
-            dict.setHasChildren(0);
+            dict.setHasChildren(false);
         }
         return dictMapper.updateById(dict);
     }
@@ -103,6 +111,9 @@ public class DictServiceImpl implements DictService {
     private QueryWrapper<Dict> getQueryWrapper(DictQueryVO dictQueryVO) {
         QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
         if(Objects.nonNull(dictQueryVO)) {
+            if(dictQueryVO.getId() != null && dictQueryVO.getId() > 0L) {
+                queryWrapper.eq("id", dictQueryVO.getId());
+            }
             if(StringUtils.isNotEmpty(dictQueryVO.getName())) {
                 queryWrapper.eq("name", dictQueryVO.getName());
             }
@@ -113,6 +124,7 @@ public class DictServiceImpl implements DictService {
                 queryWrapper.eq("dict_code", dictQueryVO.getDictCode());
             }
         }
+        queryWrapper.orderByAsc("id");
         return queryWrapper;
     }
 }

@@ -37,6 +37,12 @@ public class DictController {
         return new ApiResponse(dictDTOList);
     }
 
+    @GetMapping(value = "/getRootData")
+    public ApiResponse<List<DictDTO>> getRootData() {
+        List<DictDTO> dictDTOList = dictService.getRootData();
+        return new ApiResponse(dictDTOList);
+    }
+
     @PostMapping(value = "/list/{page}/{pageSize}")
     public ApiResponse<PageData<DictDTO>> getPageList(@PathVariable Integer page,
                                                    @PathVariable Integer pageSize,

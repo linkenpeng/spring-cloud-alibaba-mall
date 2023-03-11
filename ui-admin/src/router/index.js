@@ -91,12 +91,13 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/dict/list',
     name: '数据管理',
+    alwaysShow: true,
     meta: { title: '数据管理', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'list',
         name: '数据字典',
-        component: () => import('@/views/item/index'),
+        component: () => import('@/views/dict/index'),
         meta: { title: '数据字典', icon: 'table' }
       }
     ]

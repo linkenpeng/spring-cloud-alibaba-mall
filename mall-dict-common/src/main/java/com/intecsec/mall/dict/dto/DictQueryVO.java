@@ -10,6 +10,8 @@ import lombok.Data;
 @Data
 public class DictQueryVO {
 
+    private Long id;
+
     private String name;
 
     private String value;

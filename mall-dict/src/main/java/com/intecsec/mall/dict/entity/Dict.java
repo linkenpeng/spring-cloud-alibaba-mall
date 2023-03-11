@@ -20,7 +20,7 @@ public class Dict {
 
     private String dictCode;
 
-    private Integer hasChildren;
+    private Boolean hasChildren;
 
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreated;

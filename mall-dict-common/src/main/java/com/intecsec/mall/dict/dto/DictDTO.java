@@ -21,7 +21,7 @@ public class DictDTO {
 
     private String dictCode;
 
-    private Integer hasChildren;
+    private Boolean hasChildren;
 
     private Date gmtCreated;
 
