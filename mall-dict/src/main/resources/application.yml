@@ -38,7 +38,7 @@ logging:
     org:
       springframework: INFO
     com:
-      intecsec: DEBUG
+      intecsec: INFO
 
 
 # security actuator

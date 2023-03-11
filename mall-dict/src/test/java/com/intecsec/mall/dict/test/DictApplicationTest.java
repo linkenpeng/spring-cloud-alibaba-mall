@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,57 +34,46 @@ public class DictApplicationTest {
 
     @Test
     public void updateHashChildren() {
-        int pageSize = 100;
+        int pageSize = 1000;
         int page = 1;
-        int thread = 1;
+        int thread = 5;
+        // 10 个 thread time : 664
+        // 1 个 thread time : 730
+        // 5 个 thread time : 547
         long start = System.currentTimeMillis();
         updateAllHashChildren(page, pageSize, thread);
         long end = System.currentTimeMillis();
-        System.out.println("time:" + (end - start));
+        System.out.println("total time:" + (end - start));
     }
 
     private void updateAllHashChildren(int page, int pageSize, int thread) {
         System.out.println("page:" + page + ", pageSize:" + pageSize);
+        long start = System.currentTimeMillis();
+
         PageData<DictDTO> dictDTOPageData = dictService.pageList(page, pageSize, null);
         if (dictDTOPageData != null && dictDTOPageData.getList().size() > 0) {
 
-            Map<Integer, List<DictDTO>> group = new HashMap<>();
+            Map<Long, List<DictDTO>> group = new HashMap<>();
             if(thread > 0) {
-                int j = 0;
-                for(DictDTO dictDTO : dictDTOPageData.getList()) {
-                    for(int i = 0; i < thread; i++) {
-                        if(thread % j == i) {
-                            if(!group.containsKey(i)) {
-                                List<DictDTO> list = new ArrayList<>();
-                                group.put(i, list);
-                            }
-                            group.get(i).add(dictDTO);
-                        }
-                    }
-                    j++;
-                }
+                group = dictDTOPageData.getList().stream()
+                        .collect(Collectors.groupingBy(d -> d.getId() % thread));
             }
-
-            System.out.println(JsonUtils.toJson(group));
-            System.exit(0);
-
-
             ExecutorService executorService = new ThreadPoolExecutor(thread, thread, 1000L,
                     TimeUnit.SECONDS, new ArrayBlockingQueue<>(pageSize));
 
-            for(Map.Entry<Integer, List<DictDTO>> entry : group.entrySet()) {
-                System.out.println("current thread:" + entry.getKey());
-                executorService.submit(() -> {
-                    long start = System.currentTimeMillis();
+            for(Map.Entry<Long, List<DictDTO>> entry : group.entrySet()) {
+                executorService.execute(() -> {
                     for (DictDTO dictDTO : entry.getValue()) {
                         dictService.updateHasChildren(dictDTO.getId());
                     }
-                    long end = System.currentTimeMillis();
-                    System.out.println(entry.getKey() + " thread time:" + (end - start));
                 });
             }
 
+            executorService.shutdown();
+
             if(dictDTOPageData.getList().size() >= pageSize) {
+                long end = System.currentTimeMillis();
+                System.out.println(thread +" 个 thread time : " + (end - start));
                 updateAllHashChildren(page + 1, pageSize, thread);
             }
         }
