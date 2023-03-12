@@ -25,6 +25,12 @@ item | 2200 |
 order | 2300 | 
 dict | 2400 | 
 
+# run application
+```shell
+./mall start gateway|user|item|order|dict|all
+./mall stop gateway|user|item|order|dict|all
+```
+
 # schedule
 ## Done
 - integration spring cloud gateway

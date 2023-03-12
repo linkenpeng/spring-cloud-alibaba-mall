@@ -1,0 +1,49 @@
+#!/bin/sh
+
+start()
+{
+  app_name=mall-${1}/target/mall-${1}-1.0-SNAPSHOT.jar
+  echo "start $app_name"
+  nohup java -jar ./$app_name >/dev/null 2>&1 &
+  echo "start $app_name success.\n"
+}
+
+stop()
+{
+  app_name=mall-${1}-1.0-SNAPSHOT.jar
+	echo "stop $app_name"
+  ps -ef | grep "$app_name" | grep -v grep | awk '{print $2}' |xargs kill -9
+	echo "stop $app_name success.\n"
+}
+
+all_apps=("dict" "gateway" "item" "user" "order")
+
+if [ "$1" = "stop" ]; then
+    if [[ "${all_apps[*]}" =~ ${2} ]]; then
+          stop "$2"
+      elif [ "$2" = "all" ]; then
+          for app in ${all_apps[@]}
+             do
+                stop $app
+             done
+      else
+          echo $"Usage: $0 stop {dict|gateway|item|user|order|all}"
+          exit 1
+      fi
+fi
+
+if [ "$1" = "start" ]; then
+  if [[ "${all_apps[*]}" =~ ${2} ]]; then
+      start "$2"
+  elif [ "$2" = "all" ]; then
+      for app in ${all_apps[@]}
+         do
+            start $app
+         done
+  else
+      echo $"Usage: $0 start {dict|gateway|item|user|order|all}"
+      exit 1
+  fi
+fi
+
+exit 0

@@ -11,12 +11,12 @@
       lazy
     >
       <el-table-column label="名称" >
-        <template slot-scope="scope">
+        <template v-slot:="scope">
           <span>{{scope.row.name}}</span>
         </template>
       </el-table-column>
       <el-table-column label="编码" >
-        <template slot-scope="{row}">
+        <template v-slot:="{row}">
           <span>{{row.dict_code}}</span>
         </template>
       </el-table-column>
