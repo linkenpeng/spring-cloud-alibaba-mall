@@ -1,5 +1,6 @@
 package com.intecsec.mall.dict.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intecsec.mall.common.response.PageData;
@@ -9,10 +10,14 @@ import com.intecsec.mall.dict.dto.DictQueryVO;
 import com.intecsec.mall.dict.entity.Dict;
 import com.intecsec.mall.dict.mapper.DictMapper;
 import com.intecsec.mall.dict.service.DictService;
+import com.intecsec.mall.dict.vo.DictVO;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,6 +27,7 @@ import java.util.Objects;
  * @create: 2023-03-04 23:18
  **/
 @Service
+@Slf4j
 public class DictServiceImpl implements DictService {
 
     @Resource
@@ -76,6 +82,26 @@ public class DictServiceImpl implements DictService {
         queryWrapper.eq("parent_id", 0);
         List<Dict> list = dictMapper.selectList(queryWrapper);
         return DOUtils.copyList(list, DictDTO.class);
+    }
+
+    @Override
+    public String exportData(HttpServletResponse response) {
+        try {
+            response.setContentType("application/vnd.ms-excel");
+            response.setCharacterEncoding("utf-8");
+            String fileName = URLEncoder.encode("数据字典", "utf-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+
+            List<Dict> list = dictMapper.selectList(null);
+            List<DictVO> dictVOS = DOUtils.copyList(list, DictVO.class);
+
+            EasyExcel.write(response.getOutputStream(), DictVO.class)
+                    .sheet("dict").doWrite(dictVOS);
+        } catch (Exception e) {
+            log.info("error", e);
+        }
+
+        return "success";
     }
 
     public int updateHasChildren(long id) {

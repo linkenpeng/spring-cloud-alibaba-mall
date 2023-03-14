@@ -4,6 +4,7 @@ import com.intecsec.mall.common.response.PageData;
 import com.intecsec.mall.dict.dto.DictDTO;
 import com.intecsec.mall.dict.dto.DictQueryVO;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -26,6 +27,8 @@ public interface DictService {
     List<DictDTO> getChildData(long id);
 
     List<DictDTO> getRootData();
+
+    String exportData(HttpServletResponse response);
 
     PageData<DictDTO> pageList(int page, int pageSize, DictQueryVO dictQueryVO);
 

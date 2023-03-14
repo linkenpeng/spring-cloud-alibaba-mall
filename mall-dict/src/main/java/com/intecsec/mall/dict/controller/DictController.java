@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -29,6 +30,12 @@ public class DictController {
     public ApiResponse<DictDTO> getById(@PathVariable Long id) {
         DictDTO dictDTO = dictService.get(id);
         return new ApiResponse(dictDTO);
+    }
+
+    @GetMapping(value = "/exportData")
+    public ApiResponse<String> exportData(HttpServletResponse response) {
+        String result = dictService.exportData(response);
+        return new ApiResponse(result);
     }
 
     @GetMapping(value = "/getChildData/{id}")
