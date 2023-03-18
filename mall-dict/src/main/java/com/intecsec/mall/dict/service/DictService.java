@@ -3,6 +3,7 @@ package com.intecsec.mall.dict.service;
 import com.intecsec.mall.common.response.PageData;
 import com.intecsec.mall.dict.dto.DictDTO;
 import com.intecsec.mall.dict.dto.DictQueryVO;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -29,6 +30,8 @@ public interface DictService {
     List<DictDTO> getRootData();
 
     String exportData(HttpServletResponse response);
+
+    String importData(MultipartFile file);
 
     PageData<DictDTO> pageList(int page, int pageSize, DictQueryVO dictQueryVO);
 

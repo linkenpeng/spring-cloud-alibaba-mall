@@ -1,5 +1,7 @@
 #!/bin/sh
 
+all_apps=("dict" "gateway" "item" "user" "order")
+
 start()
 {
   app_name=mall-${1}/target/mall-${1}-1.0-SNAPSHOT.jar
@@ -16,7 +18,19 @@ stop()
 	echo "stop $app_name success.\n"
 }
 
-all_apps=("dict" "gateway" "item" "user" "order")
+if [ "$1" = "start" ]; then
+  if [[ "${all_apps[*]}" =~ ${2} ]]; then
+      start "$2"
+  elif [ "$2" = "all" ]; then
+      for app in ${all_apps[@]}
+         do
+            start $app
+         done
+  else
+      echo $"Usage: $0 start {dict|gateway|item|user|order|all}"
+      exit 1
+  fi
+fi
 
 if [ "$1" = "stop" ]; then
     if [[ "${all_apps[*]}" =~ ${2} ]]; then
@@ -32,18 +46,20 @@ if [ "$1" = "stop" ]; then
       fi
 fi
 
-if [ "$1" = "start" ]; then
-  if [[ "${all_apps[*]}" =~ ${2} ]]; then
-      start "$2"
-  elif [ "$2" = "all" ]; then
-      for app in ${all_apps[@]}
-         do
-            start $app
-         done
-  else
-      echo $"Usage: $0 start {dict|gateway|item|user|order|all}"
-      exit 1
-  fi
+if [ "$1" = "restart" ]; then
+    if [[ "${all_apps[*]}" =~ ${2} ]]; then
+          stop "$2"
+          start "$2"
+      elif [ "$2" = "all" ]; then
+          for app in ${all_apps[@]}
+             do
+                stop $app
+                start $app
+             done
+      else
+          echo $"Usage: $0 restart {dict|gateway|item|user|order|all}"
+          exit 1
+      fi
 fi
 
 exit 0

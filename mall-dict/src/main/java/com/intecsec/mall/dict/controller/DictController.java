@@ -8,6 +8,7 @@ import com.intecsec.mall.dict.dto.DictQueryVO;
 import com.intecsec.mall.dict.service.DictService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,12 @@ public class DictController {
     @GetMapping(value = "/exportData")
     public ApiResponse<String> exportData(HttpServletResponse response) {
         String result = dictService.exportData(response);
+        return new ApiResponse(result);
+    }
+
+    @PostMapping(value = "/importData")
+    public ApiResponse<String> importData(MultipartFile file) {
+        String result = dictService.importData(file);
         return new ApiResponse(result);
     }
 

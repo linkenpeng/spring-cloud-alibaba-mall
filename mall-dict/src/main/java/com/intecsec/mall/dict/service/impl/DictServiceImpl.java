@@ -8,12 +8,14 @@ import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.dict.dto.DictDTO;
 import com.intecsec.mall.dict.dto.DictQueryVO;
 import com.intecsec.mall.dict.entity.Dict;
+import com.intecsec.mall.dict.listener.DictListener;
 import com.intecsec.mall.dict.mapper.DictMapper;
 import com.intecsec.mall.dict.service.DictService;
 import com.intecsec.mall.dict.vo.DictVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -101,6 +103,17 @@ public class DictServiceImpl implements DictService {
             log.info("error", e);
         }
 
+        return "success";
+    }
+
+    @Override
+    public String importData(MultipartFile file) {
+        try {
+            EasyExcel.read(file.getInputStream(), DictVO.class, new DictListener(dictMapper))
+                    .sheet().doRead();
+        } catch (Exception e) {
+            log.info("error", e);
+        }
         return "success";
     }
 
