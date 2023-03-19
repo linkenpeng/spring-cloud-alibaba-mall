@@ -14,6 +14,8 @@ import com.intecsec.mall.dict.service.DictService;
 import com.intecsec.mall.dict.vo.DictVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -66,6 +68,7 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
+    @Cacheable(value = "dict", keyGenerator = "keyGenerator")
     public List<DictDTO> getChildData(long id) {
         QueryWrapper<Dict> queryWrapper = getChildWrapper(id);
         List<Dict> list = dictMapper.selectList(queryWrapper);
@@ -79,6 +82,7 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
+    @Cacheable(value = "dict", keyGenerator = "keyGenerator")
     public List<DictDTO> getRootData() {
         QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("parent_id", 0);
@@ -107,6 +111,7 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
+    @CacheEvict(value = "dict", allEntries = true)
     public String importData(MultipartFile file) {
         try {
             EasyExcel.read(file.getInputStream(), DictVO.class, new DictListener(dictMapper))

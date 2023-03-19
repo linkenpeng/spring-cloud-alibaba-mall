@@ -55,6 +55,7 @@
         <jjwt.version>0.9.1</jjwt.version>
         <guava.version>30.1-jre</guava.version>
         <easyexcel.version>3.2.1</easyexcel.version>
+        <commons-pool2.version>2.11.1</commons-pool2.version>
     </properties>
 
     <dependencyManagement>
@@ -220,6 +221,14 @@
                 <artifactId>easyexcel</artifactId>
                 <version>${easyexcel.version}</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

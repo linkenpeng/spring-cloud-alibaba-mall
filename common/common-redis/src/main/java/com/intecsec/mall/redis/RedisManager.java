@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisManager {
 
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
 
     /**
      * 指定缓存失效时间

@@ -1,7 +1,6 @@
 package com.intecsec.mall.user.controller;
 
 import com.intecsec.mall.common.response.ApiResponse;
-import com.intecsec.mall.common.utils.JwtUtil;
 import com.intecsec.mall.user.dto.UserConsigneeDTO;
 import com.intecsec.mall.user.dto.UserDTO;
 import com.intecsec.mall.user.dto.UserLoginDTO;
