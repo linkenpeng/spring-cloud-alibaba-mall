@@ -17,6 +17,10 @@ $ npm start
 
 # generate static project
 $ npm run generate
+
+# 自定义安装依赖
+$ npm install element-ui
+$ npm install axios
 ```
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
