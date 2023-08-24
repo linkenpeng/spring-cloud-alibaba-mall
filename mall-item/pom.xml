@@ -44,6 +44,11 @@
             <artifactId>common-service</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>common-redis</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

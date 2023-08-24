@@ -56,6 +56,7 @@
         <guava.version>30.1-jre</guava.version>
         <easyexcel.version>3.2.1</easyexcel.version>
         <commons-pool2.version>2.11.1</commons-pool2.version>
+        <caffeine.version>3.0.5</caffeine.version>
     </properties>
 
     <dependencyManagement>
@@ -227,6 +228,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-pool2</artifactId>
                 <version>${commons-pool2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
             </dependency>
 
 

@@ -2,6 +2,9 @@ package com.intecsec.mall.item.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.benmanes.caffeine.cache.CacheLoader;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.LoadingCache;
 import com.intecsec.mall.common.response.PageData;
 import com.intecsec.mall.common.utils.DOUtils;
 import com.intecsec.mall.common.utils.JsonUtils;
@@ -15,12 +18,15 @@ import com.intecsec.mall.item.mapper.ItemMapper;
 import com.intecsec.mall.item.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -37,6 +43,18 @@ public class ItemServiceImpl implements ItemService {
 
     @Resource
     private ItemCategoryMapper itemCategoryMapper;
+
+    private LoadingCache<Long, Map<Long,ItemDTO>> cache = Caffeine.newBuilder()
+            .expireAfterWrite(5, TimeUnit.MINUTES)
+            .refreshAfterWrite(5, TimeUnit.MINUTES)
+            .build(new CacheLoader<Long, Map<Long,ItemDTO>>() {
+                @Override
+                public Map<Long, ItemDTO> load(Long aLong) throws Exception {
+                    List<Item> itemList = itemMapper.selectList(null);
+                    List<ItemDTO> itemDTOS = DOUtils.copyList(itemList, ItemDTO.class);
+                    return itemDTOS.stream().collect(Collectors.toMap(ItemDTO::getId, Function.identity(), (k1, k2) -> k1));
+                }
+            });
 
     @Override
     public ItemDTO itemDetail(Long itemId) {
