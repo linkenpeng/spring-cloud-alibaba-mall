@@ -8,7 +8,7 @@ import com.intecsec.mall.item.mapper.ItemSkuMapper;
 import com.intecsec.mall.item.service.ItemSkuService;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 
 /**

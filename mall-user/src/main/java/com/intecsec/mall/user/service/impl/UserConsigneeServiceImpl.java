@@ -7,7 +7,7 @@ import com.intecsec.mall.user.service.UserConsigneeService;
 import com.intecsec.mall.user.mapper.UserConsigneeMapper;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 
 /**

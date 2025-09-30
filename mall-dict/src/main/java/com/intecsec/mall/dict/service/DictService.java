@@ -5,7 +5,7 @@ import com.intecsec.mall.dict.dto.DictDTO;
 import com.intecsec.mall.dict.dto.DictQueryVO;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**

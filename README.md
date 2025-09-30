@@ -41,3 +41,15 @@ dict | 2400 |
 
 ## TODO
 - integration rocket mq
+
+### Components Version
+component |            version 
+-:|-------------------:
+JDK |                 21 |
+SpringBoot |              3.5.6 |
+SpringCloud |           2025.0.0 |
+SpringCloud-Alibaba | 2025.0.0.0-preview | 
+lombok | 1.18.42 |
+Maven |             3.9.11 | 
+MySQL |              8.4.6 | 
+Redis |              5.0.7 | 

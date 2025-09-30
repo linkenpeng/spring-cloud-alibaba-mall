@@ -6,7 +6,7 @@ import com.intecsec.mall.common.utils.TraceUtils;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.annotation.PostConstruct;
+//import jakarta.annotation.PostConstruct;
 import java.io.Serializable;
 
 /**
@@ -28,7 +28,7 @@ public class ApiResponse<T> implements Serializable {
 
     private String traceId;
 
-    @PostConstruct
+    //@PostConstruct
     private void init() {
         try {
             this.traceId = TraceUtils.currentTraceId();

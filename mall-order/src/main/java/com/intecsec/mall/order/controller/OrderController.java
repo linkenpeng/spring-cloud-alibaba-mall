@@ -6,7 +6,7 @@ import com.intecsec.mall.order.dto.OrderDTO;
 import com.intecsec.mall.order.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 
 /**
