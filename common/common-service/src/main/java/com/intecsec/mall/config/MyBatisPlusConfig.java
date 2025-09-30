@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
  * @create: 2022-11-16 22:04
  **/
 @Configuration
-// @MapperScan("com.intecsec.mall.user.mapper")
 public class MyBatisPlusConfig {
 
     // 3.4.0 之前的用法
