@@ -2,33 +2,6 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for order
--- ----------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `order_sn` varchar(64) NOT NULL DEFAULT '',
-  `user_id` bigint NOT NULL,
-  `order_status` mediumint NOT NULL,
-  `price_amount` bigint NOT NULL DEFAULT '0',
-  `discount_amount` bigint DEFAULT '0',
-  `coupon_amount` bigint DEFAULT '0',
-  `point_amount` bigint DEFAULT '0',
-  `delivery_fee` bigint DEFAULT '0',
-  `pay_amount` bigint DEFAULT '0',
-  `gmt_created` datetime DEFAULT CURRENT_TIMESTAMP,
-  `gmt_updated` datetime DEFAULT CURRENT_TIMESTAMP,
-  `delete_mark` tinyint DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- ----------------------------
--- Records of order
--- ----------------------------
-BEGIN;
-COMMIT;
-
--- ----------------------------
 -- Table structure for order_consignee
 -- ----------------------------
 DROP TABLE IF EXISTS `order_consignee`;
@@ -78,6 +51,33 @@ CREATE TABLE `order_item` (
 
 -- ----------------------------
 -- Records of order_item
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for order_trade
+-- ----------------------------
+DROP TABLE IF EXISTS `order_trade`;
+CREATE TABLE `order_trade` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `order_sn` varchar(64) NOT NULL DEFAULT '',
+  `user_id` bigint NOT NULL,
+  `order_status` mediumint NOT NULL,
+  `price_amount` bigint NOT NULL DEFAULT '0',
+  `discount_amount` bigint DEFAULT '0',
+  `coupon_amount` bigint DEFAULT '0',
+  `point_amount` bigint DEFAULT '0',
+  `delivery_fee` bigint DEFAULT '0',
+  `pay_amount` bigint DEFAULT '0',
+  `gmt_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `gmt_updated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `delete_mark` tinyint DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of order_trade
 -- ----------------------------
 BEGIN;
 COMMIT;
